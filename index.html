@@ -5,6 +5,20 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Adaptive Math Test</title>
 		<link rel="stylesheet" type="text/css" href="css/quiz.css">
+		<!-- Auth0's lock widget library -->
+		<script type="text/javascript" src="https://cdn.auth0.com/js/lock-7.12.min.js"></script>
+		<!-- AngularJS core -->
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
+		<!-- Angular cookie wrapper library for client cookies -->
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular-cookies.js"></script>
+		<!-- Angular's Router Library for SPA -->
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular-route.js"></script>
+		<!-- Auth0's Angular SDK Library -->
+		<script type="text/javascript" src="https://cdn.auth0.com/w2/auth0-angular-4.js"></script>
+		<!-- Angular wrapper for localStorage and sessionStorage. Defaults to ng-cookies if not available -->
+		<script src="http://cdn.rawgit.com/auth0/angular-storage/master/dist/angular-storage.js" type="text/javascript"> </script>
+		<!-- Angular wrapper library for JWT-->
+		<script src="http://cdn.rawgit.com/auth0/angular-jwt/master/dist/angular-jwt.js" type="text/javascript"> </script>
 	</head>
 	<body>
 		<div id="mathQuiz" ng-controller="QuizController">
@@ -19,7 +33,7 @@
 			<div class="intro {{ (activeQuestion > -1) ? 'inactive' :'active'}}">
 				<h2>Welcome</h2>
 					<p>Click begin to start your Math test</p>
-					<p class="btn" ng-click="activeQuestion=0">Begin</p>
+					<p ng-click="login()" class="btn">Begin</p>
 			</div>
 			<div class="question 
 				{{ $index === activeQuestion ? 'active':'inactive'}} {{ myQuestion.questionState === 'answered' ? 'answered':'unanswered'}}" ng-repeat="myQuestion in myQuestions">
@@ -49,7 +63,7 @@
 				<div class="share" ng-bind-html = "createShareLinks(percentage)"></div>
 			</div>
 		</div>
-	<script type="text/javascript" src="js/angular.min.js"></script>
+	<!--script type="text/javascript" src="js/angular.min.js"></script-->
 	<script type="text/javascript" src='js/quiz.js'></script>		
 
 	</body>
