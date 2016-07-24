@@ -8,7 +8,7 @@ body { background-color: #fff; padding: 20px; }
 	position: relative;
 	overflow: hidden;;
 	color: #fff;
-	background:#000 url(../images/background.jpg) no-repeat 0px 0px;
+	background:#000 url() no-repeat 0px 0px;
 }
 
 #mathQuiz h1 {
@@ -44,7 +44,7 @@ body { background-color: #fff; padding: 20px; }
 
 #mathQuiz .progress div::after{
 	content: ''; display: block; position: absolute; top: -60px; left: -10px;
-	width: 65px; height: 40px; background: url(../images/ring.svg) no-repeat 0px 0px;
+	width: 65px; height: 40px; background: url() no-repeat 0px 0px;
 	transition: opacity 1s, top 1s; opacity 0;
 }
 
@@ -84,8 +84,8 @@ body { background-color: #fff; padding: 20px; }
 	right: 5px;
 }
 
-#mathQuiz .question .ans.selected:after { background-image: url(../images/icon_incorrect.svg);}
-#mathQuiz .question .ans.correct:after { background-image: url(../images/icon_correct.svg);}
+#mathQuiz .question .ans.selected:after { background-image: url();}
+#mathQuiz .question .ans.correct:after { background-image: url();}
 
 #mathQuiz .question.unanswered .ans {cursor:pointer;}
 #mathQuiz .question.unanswered .ans:hover {background-color: rgba(238,189,102,0.2);}
@@ -117,7 +117,7 @@ visibility: hidden; opacity: 0;}
 }
 
 #mathQuiz .results .share a.btn.email { background-color: #f0a121;}
-#mathQuiz .results .share a.btn.twitter { background-color: #59adeb; background-image: url(../images/icon_twitter.svg);}
+#mathQuiz .results .share a.btn.twitter { background-color: #59adeb;}
 #mathQuiz .results a.btn.end { background-color: #960000; }
 
 #mathQuiz .active, #mathQuiz .inactive { transition:left 1s ease-in-out;}
