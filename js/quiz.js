@@ -1,26 +1,65 @@
 (function(){
 	var	app = angular.module('mathQuiz', ['auth0', 'angular-storage', 'angular-jwt', 'ngRoute']);
-	app.controller('QuizController', ['$scope', '$http', '$sce', 'auth', 'store', function($scope, $http, $sce, auth, store){
+	app.controller('QuizController',
+	 ['$scope', '$http', '$sce', 'auth', 'store', function($scope, $http, $sce, auth, store){
 		$scope.score = 0;
 		$scope.activeQuestion = -1;
 		$scope.activeQuestionAnswered = 0;
 		$scope.percentage = 0;
 
-		$scope.login = function(){
-			$scope.activeQuestion = 0;
-		    // Set popup to true to use popup
-		    auth.signin({popup: true}, function(profile, token){
-		      store.set('profile', profile);
-		      store.set('token', token);
-		    }, function(err){
-		      console.log('unable to signin through Auth0');
-		    });
+		getQuestions = function(){
+		    $http.get('http://localhost:8000/test/protected').then(function(response){
+		    	$scope.myQuestions =[];
+			    for(var i=0; i<response.data.questions.length; i++){
+			    	$scope.myQuestions.push({
+			    		"question":response.data.questions[i].question,
+			    		"answers":[{"id":0, "text":response.data.questions[i].answer0},
+								  {"id":1, "text":response.data.questions[i].answer1},
+								  {"id":2, "text":response.data.questions[i].answer2},
+								  {"id":3, "text":response.data.questions[i].answer3}],
+						"correct" : response.data.questions[i].correct_answer			    					
+			    	});
+			    }
+				$scope.totalQuestions = $scope.myQuestions.length;
+			});
+	        $scope.activeQuestion = 0;
 		}
 
-		$http.get('quiz_data.json').then(function(quizData){
-			$scope.myQuestions = quizData.data;
-			$scope.totalQuestions = $scope.myQuestions.length;
-		});
+		$scope.login = function(){
+		    // Set popup to true to use popup
+		    if (auth.isAuthenticated){
+				getQuestions();
+		    }
+		    else {
+		    	auth.signin({
+		    		popup: true,
+		            title: "Login me in",
+		            gravatar:false,
+		            icon: "http://www.all-gifted.com/images/allgifted-smalllogo.jpg",
+		            authParams: {
+		                scope: 'openid email name picture' 
+		            }		    		
+		    	}, function(profile, token){
+			        store.set('profile', profile);
+			        store.set('token', token);
+			        getQuestions();
+			    }, function(err){
+			    	alert('unable to signin');
+		    	})
+		    };
+
+		};
+
+		$scope.logout = function(){
+			store.remove('profile');
+			store.remove('token');
+			auth.signout();
+		};
+
+		if (auth.isAuthenticated){
+
+
+		};
 
 		$scope.selectAnswer = function(qIndex, aIndex){
 			var questionState = $scope.myQuestions[qIndex].questionState;
@@ -52,33 +91,25 @@
 		}
 		$scope.createShareLinks = function(percentage){
 			var url='http://www.all-gifted.com';
-			var emailLink = '<a class="btn email" href = "#">Email parent</a>';
-			var twitterLink = '<a class="btn twitter" target="_blank" href="#">Tweet parent</a>';
+			var emailLink = '<a class="btn email" href = "mailto:ace.allgifted@gmail.com" ng-click="logout()">Email parent</a>';
+			var twitterLink = '<a class="btn twitter" href="#" ng-click="logout()">Tweet parent</a>';
 			var newMarkup = emailLink + twitterLink;
 			return $sce.trustAsHtml(newMarkup);
 		}
 
 	}]);
 
-	app.config( function myAppConfig (authProvider) {
+	app.config( function(authProvider, $httpProvider, jwtInterceptorProvider) {
 		authProvider.init({
 		    domain: 'pamelalim.auth0.com',
 		    clientID: 'eVJv6UFM9GVdukBWiURczRCxmb6iaUYG'
 		});
-		authProvider.on('loginSuccess', ['$location', 'profilePromise', 'idToken', 'store', function($location, profilePromise, idToken, store) {
-		  // Successfully log in
-		  // Access to user profile and token
-		  profilePromise.then(function(profile){
-		    // profile
-		    store.set('profile', profile);
-		    store.set('token', token);
-		  });
-		  $location.url('/');
-		}]);
-		//Called when login fails
-		authProvider.on('loginFailure', function() {
-		  console.log('login failed');
-		});
+
+		jwtInterceptorProvider.tokenGetter = function(store) {
+			return store.get('token');
+		}
+
+		$httpProvider.interceptors.push('jwtInterceptor');
 	});
 
 	app.run(['$rootScope', 'auth', 'store', 'jwtHelper', '$location', function($rootScope, auth, store, jwtHelper, $location) {

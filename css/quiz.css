@@ -116,8 +116,9 @@ visibility: hidden; opacity: 0;}
 	background-size: 25px 25px;
 }
 
-#mathQuiz .results .share a.btn.email { background-color: #f0a121; background-image: url(../images/icon_email.svg);}
+#mathQuiz .results .share a.btn.email { background-color: #f0a121;}
 #mathQuiz .results .share a.btn.twitter { background-color: #59adeb; background-image: url(../images/icon_twitter.svg);}
+#mathQuiz .results a.btn.end { background-color: #960000; }
 
 #mathQuiz .active, #mathQuiz .inactive { transition:left 1s ease-in-out;}
 #mathQuiz .active { left: 40px;}

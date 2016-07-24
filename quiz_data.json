@@ -1,56 +1,92 @@
 [
-	{
-		"question" : "Find all x such |2x| = 6",
-		"answers":[
-		{"id":0, "text":"3"},
-		{"id":1, "text":"-3"},
-		{"id":2, "text":"{-3,3}"},
-		{"id":3, "text":"None of the above."}		
-		],
-		"correct" : 2,
-		"feedback" : "2x = 6 or 2x = -6, therefore x = -3 or 3, which can be written as {-3,3}"
-
-	},
-
-	{
-		"question" : "Solve the following simultaneous equations using substitution. \t 3x - 2y = 10, \nx + 3y = 7",
-		"answers"  : [
-			{"id"  : 0, "text" : "x = 4, y = 11" },
-			{"id"  : 1, "text" : "x = 11, y = 4" },
-			{"id"  : 2, "text" : "x = 4, y = 14" },
-			{"id"  : 3, "text" : "y = 11, x = 11" }
-		],
-		"correct"  : 0
-	},
-	{
-		"question" : "Find the gradient of the line passing through the points (-2,-2) and (-2,3)",
-		"answers"  : [
-			{"id"  : 0, "text" : "1"},
-			{"id"  : 1, "text" : "0"},
-			{"id"  : 2, "text" : "undefined"},
-			{"id"  : 3, "text" : "infinity"}
-		],
-		"correct"  : 2
-	},
-	{
-		"question" : "Find the gradient of the line passing through the points (-1,1) and (3,-3)",
-		"answers"  : [
-			{"id"  : 0, "text" : "0"},
-			{"id"  : 1, "text" : "undefined"},
-			{"id"  : 2, "text" : "3"},
-			{"id"  : 3, "text" : "1"},
-			{"id"  : 4, "text" : "horizontal"},
-			{"id"  : 5, "text" : "vertical"}
-		],
-		"correct"  : 3,
-		"feedback" : "Gradient = difference in y / difference in x"
-	},
-	{
-		"question" : "A vertical line has an undefined gradient.",
-		"answers"  : [
-			{"id"  : 0, "text" : "True"},
-			{"id"  : 1, "text" : "False"}
-		],
-		"correct"  : 0
-	}
-]
+   {
+      "id": 1,
+      "difficulty_id": 1,
+      "question": "How many stars can you count?",
+      "question_image": "/allgifted-images/question_image/1.jpg",
+      "answer0": "3",
+      "answer0_image": null,
+      "answer1": "5",
+      "answer1_image": null,
+      "answer2": "8",
+      "answer2_image": null,
+      "answer3": "None of the above",
+      "answer3_image": null,
+      "correct_answer": 1,
+      "status_id": 1,
+      "source": null,
+      "type_id": 1
+    },
+    {
+      "id": 2,
+      "difficulty_id": 1,
+      "question": "How many stars can you count? \nCopy 1",
+      "question_image": "/allgifted-images/question_image/1.jpg",
+      "answer0": "3",
+      "answer0_image": null,
+      "answer1": "5",
+      "answer1_image": null,
+      "answer2": "8",
+      "answer2_image": null,
+      "answer3": "None of the above",
+      "answer3_image": null,
+      "correct_answer": 1,
+      "status_id": 1,
+      "source": null,
+      "type_id": 1
+    },
+    {
+      "id": 3,
+      "difficulty_id": 1,
+      "question": "How many stars can you count? \nCopy 2",
+      "question_image": "/allgifted-images/question_image/1.jpg",
+      "answer0": "3",
+      "answer0_image": null,
+      "answer1": "5",
+      "answer1_image": null,
+      "answer2": "8",
+      "answer2_image": null,
+      "answer3": "None of the above",
+      "answer3_image": null,
+      "correct_answer": 1,
+      "status_id": 1,
+      "source": null,
+      "type_id": 1
+    },
+    {
+      "id": 4,
+      "difficulty_id": 2,
+      "question": "Click on the box with the smallest number.",
+      "question_image": null,
+      "answer0": "2",
+      "answer0_image": null,
+      "answer1": "9",
+      "answer1_image": null,
+      "answer2": "7",
+      "answer2_image": null,
+      "answer3": "5",
+      "answer3_image": null,
+      "correct_answer": 0,
+      "status_id": 1,
+      "source": null,
+      "type_id": 1
+    },
+    {
+      "id": 5,
+      "difficulty_id": 2,
+      "question": "Click on the box with the smallest number. Copy 1",
+      "question_image": null,
+      "answer0": "2",
+      "answer0_image": null,
+      "answer1": "9",
+      "answer1_image": null,
+      "answer2": "7",
+      "answer2_image": null,
+      "answer3": "5",
+      "answer3_image": null,
+      "correct_answer": 0,
+      "status_id": 1,
+      "source": null,
+      "type_id": 1
+    }
+ ]
