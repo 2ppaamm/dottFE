@@ -8,7 +8,6 @@
 		$scope.percentage = 0;
 
 		getQuestions = function(){
-
 		    $http.get('http://api.japher.org/test/protected').then(function(response){
 		    	$scope.myQuestions =[];
 		    	var questions = response.data.questions;
