@@ -9,7 +9,7 @@
 
 		getQuestions = function(){
 
-		    $http.get('http://localhost:8000/test/protected').then(function(response){
+		    $http.get('http://api.japher.org/test/protected').then(function(response){
 		    	$scope.myQuestions =[];
 		    	var questions = response.data.questions;
 			    for(var i=0; i<questions.length; i++){
