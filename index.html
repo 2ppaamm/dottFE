@@ -29,6 +29,8 @@
 				<p class="txt">
 					{{ myQuestion.question }}
 				</p>
+				<p ng-if="myQuestion.question_image" class="question_image" ng-style="{ 'background-image':'url({{myQuestion.question_image}})' }">
+				</p>
 				<p class="ans" 
 					ng-class="{
 						image:Answer.image,

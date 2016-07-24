@@ -8,16 +8,19 @@
 		$scope.percentage = 0;
 
 		getQuestions = function(){
+
 		    $http.get('http://localhost:8000/test/protected').then(function(response){
 		    	$scope.myQuestions =[];
-			    for(var i=0; i<response.data.questions.length; i++){
+		    	var questions = response.data.questions;
+			    for(var i=0; i<questions.length; i++){
 			    	$scope.myQuestions.push({
-			    		"question":response.data.questions[i].question,
-			    		"answers":[{"id":0, "text":response.data.questions[i].answer0},
-								  {"id":1, "text":response.data.questions[i].answer1},
-								  {"id":2, "text":response.data.questions[i].answer2},
-								  {"id":3, "text":response.data.questions[i].answer3}],
-						"correct" : response.data.questions[i].correct_answer			    					
+			    		"question":questions[i].question,
+			    		"question_image":questions[i].question_image,
+			    		"answers":[{"id":0, "text":questions[i].answer0, "image":questions[i].answer0_image},
+								  {"id":1, "text":questions[i].answer1, "image":questions[i].answer1_image},
+								  {"id":2, "text":questions[i].answer2, "image":questions[i].answer2_image},
+								  {"id":3, "text":questions[i].answer3, "image":questions[i].answer3_image}],
+						"correct" : questions[i].correct_answer			    					
 			    	});
 			    }
 				$scope.totalQuestions = $scope.myQuestions.length;
@@ -54,11 +57,6 @@
 			store.remove('profile');
 			store.remove('token');
 			auth.signout();
-		};
-
-		if (auth.isAuthenticated){
-
-
 		};
 
 		$scope.selectAnswer = function(qIndex, aIndex){

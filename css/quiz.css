@@ -12,13 +12,13 @@ body { background-color: #fff; padding: 20px; }
 }
 
 #mathQuiz h1 {
-	font-weight: 100; font-size: 2em; text-transform: uppercase; margin: 0px;
+	font-weight: 100; font-size: 1.5em; text-transform: uppercase; margin: 0px;
 	position: absolute; top: 25px; left: 36px;
 }
 
 #mathQuiz h1 span {
 	display: block; font-family: 'Titillium Web', sans-serif;
-	font-size: 3.2em; line-height: 65px;
+	font-size: 3em; line-height: 65px;
 }
 #mathQuiz h2 { font-size: 3em; margin: 0px; font-weight: 100;}
 #mathQuiz h3 { font-size: 2.4em; margin: 0px; font-weight: 100;}
@@ -30,7 +30,7 @@ body { background-color: #fff; padding: 20px; }
 }
 
 /* Progress Bar */
-#mathQuiz .progress {width: 550px; position: absolute;top:160px; left: 40px}
+#mathQuiz .progress {width: 550px; position: absolute;top:120px; left: 40px}
 #mathQuiz .progress div {
 	position: relative;
 	display: inline-block;
@@ -54,12 +54,13 @@ body { background-color: #fff; padding: 20px; }
 #mathQuiz .progress div.correct::after { top:-5px; opacity: 1}
 
 /* Intro */
-#mathQuiz .intro { position: absolute; top:225px; left:40px; width: 550px;}
+#mathQuiz .intro { position: absolute; top:200px; left:40px; width: 550px;}
 #mathQuiz .intro p { margin:0px 0px 40px 0px;}
 
 /* Questions */
-#mathQuiz .question { width: 550px; position: absolute; top:225px; left: 660px}
-#mathQuiz .question .txt { font-size: 1.6em; margin: 0px 0px 20px 0px}
+#mathQuiz .question { width: 550px; position: absolute; top:170px; left: 660px}
+#mathQuiz .question .txt { font-size: 1.4em; margin: 0px 0px 20px 0px; }
+#mathQuiz .question .question_image { min-height:200px; background-repeat:no-repeat; background-position:center; background-size:80% 100%;}
 #mathQuiz .question .ans { 
 	display: inline-block;
 	font-size: 1.1em;
@@ -136,10 +137,10 @@ visibility: hidden; opacity: 0;}
 	#mathQuiz .progress div { width: 25px; height: 25px; margin-right: 20px;}
 	#mathQuiz .progress div::after {top: -30px; width: 53px; height: :33px;}
 
-	#mathQuiz .intro {width:300px; top: 135px; left: 330px;}
+	#mathQuiz .intro {width:300px; top: 115px; left: 330px;}
 
-	#mathQuiz .question {width: 300px; top: 235px; left: 330px;}
-	#mathQuiz .question .txt {font-size: 1.4em; margin 0px 0px 20px 0px;}
+	#mathQuiz .question {width: 300px; top: 150px; left: 330px;}
+	#mathQuiz .question .txt {font-size: 1.4em; margin 0px 0px 20px 0px; background-size:80% 100%;}
 	#mathQuiz .question .ans {font-size: 1em; padding: 5px 10px; margin-bottom: 10px; }
 	#mathQuiz .question .ans.image {min-height: 45px; background-size: auto 45px;}
 	#mathQuiz .question .ans.image:hover {background-color:  #000;}
