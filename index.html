@@ -22,7 +22,7 @@
 			<div class="intro {{ (activeQuestion > -1) ? 'inactive' :'active'}}">
 				<h2>Welcome</h2>
 					<p>Click begin to start your Math test</p>
-					<p ng-click="login()" class="btn">Begin</p>
+					<div ng-click="login()" class="btn">Begin</div>
 			</div>
 			<div class="question 
 				{{ $index === activeQuestion ? 'active':'inactive'}} {{ myQuestion.questionState === 'answered' ? 'answered':'unanswered'}}" ng-repeat="myQuestion in myQuestions">
