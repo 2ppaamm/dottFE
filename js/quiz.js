@@ -6,13 +6,17 @@
 		$scope.activeQuestion = -1;
 		$scope.activeQuestionAnswered = 0;
 		$scope.percentage = 0;
-
+		$scope.myAnswers ={'question_id':[], 'answer':[]};
+// function to get questions
 		getQuestions = function(){
-		    $http.get('http://api.japher.org/test/protected').then(function(response){
+		    $http.get('http://localhost:8000/test/protected').then(function(response){
 		    	$scope.myQuestions =[];
+		    	$scope.myAnswers['test'] = response.data.test.id;
+		    	console.log($scope.myAnswers);
 		    	var questions = response.data.questions;
 			    for(var i=0; i<questions.length; i++){
 			    	$scope.myQuestions.push({
+			    		"id": questions[i].id,
 			    		"question":questions[i].question,
 			    		"question_image":questions[i].question_image,
 			    		"answers":[{"id":0, "text":questions[i].answer0, "image":questions[i].answer0_image},
@@ -27,6 +31,7 @@
 	        $scope.activeQuestion = 0;
 		}
 
+// login and then get the questions from api
 		$scope.login = function(){
 		    // Set popup to true to use popup
 		    if (auth.isAuthenticated){
@@ -54,18 +59,20 @@
 
 		$scope.logout = function(){
 			store.remove('profile');
-			store.remove('token');
+			store.remove('token');+
 			auth.signout();
 		};
 
 		$scope.selectAnswer = function(qIndex, aIndex){
 			var questionState = $scope.myQuestions[qIndex].questionState;
-			
 			if (questionState != 'answered'){
 				$scope.myQuestions[qIndex].selectedAnswer=aIndex;
 				var correctAnswer = $scope.myQuestions[qIndex].correct;
 
 				$scope.myQuestions[qIndex].correctAnswer = correctAnswer;
+
+				$scope.myAnswers['question_id'].push($scope.myQuestions[qIndex].id);
+				$scope.myAnswers['answer'].push(aIndex);
 
 				if (aIndex === correctAnswer){
 					$scope.myQuestions[qIndex].correctness = 'correct';
@@ -84,6 +91,13 @@
 			return $scope.myQuestions[qIndex].correctAnswer === aIndex;
 		}
 		$scope.selectContinue = function(){
+			if ($scope.totalQuestions == $scope.activeQuestion+1){
+				//$scope.myAnswers.merge($scope.test);
+				$http.post('http://localhost:8000/test/answers',$scope.myAnswers),(function(message){
+					alert(message);
+				})
+			}			
+
 			return $scope.activeQuestion += 1;
 		}
 		$scope.createShareLinks = function(percentage){
