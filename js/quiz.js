@@ -9,7 +9,7 @@
 		$scope.myAnswers ={'question_id':[], 'answer':[]};
 // function to get questions
 		getQuestions = function(){
-		    $http.get('http://localhost:8000/test/protected').then(function(response){
+		    $http.get('http://api.japher.org/test/protected').then(function(response){
 		    	$scope.myQuestions =[];
 		    	$scope.myAnswers['test'] = response.data.test.id;
 		    	console.log($scope.myAnswers);
@@ -93,7 +93,7 @@
 		$scope.selectContinue = function(){
 			if ($scope.totalQuestions == $scope.activeQuestion+1){
 				//$scope.myAnswers.merge($scope.test);
-				$http.post('http://localhost:8000/test/answers',$scope.myAnswers),(function(message){
+				$http.post('http://api.japher.org/test/answers',$scope.myAnswers),(function(message){
 					alert(message);
 				})
 			}			
