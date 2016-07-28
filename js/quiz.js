@@ -7,12 +7,12 @@
 		$scope.activeQuestionAnswered = 0;
 		$scope.percentage = 0;
 		$scope.myAnswers ={'question_id':[], 'answer':[]};
-// function to get questions
-		getQuestions = function(){
-		    $http.get('http://api.japher.org/test/protected').then(function(response){
+
+		// function to get questions
+		getQuestions = function(questionUrl){
+		    $http.get(questionUrl).then(function(response){
 		    	$scope.myQuestions =[];
 		    	$scope.myAnswers['test'] = response.data.test.id;
-		    	console.log($scope.myAnswers);
 		    	var questions = response.data.questions;
 			    for(var i=0; i<questions.length; i++){
 			    	$scope.myQuestions.push({
@@ -31,11 +31,11 @@
 	        $scope.activeQuestion = 0;
 		}
 
-// login and then get the questions from api
+		// login and then get the questions from api
 		$scope.login = function(){
 		    // Set popup to true to use popup
 		    if (auth.isAuthenticated){
-				getQuestions();
+				getQuestions('http://quizapi.pamelalim.me/test/protected');
 		    }
 		    else {
 		    	auth.signin({
@@ -49,7 +49,7 @@
 		    	}, function(profile, token){
 			        store.set('profile', profile);
 			        store.set('token', token);
-			        getQuestions();
+			        getQuestions('http://quizapi.pamelalim.me/test/protected');
 			    }, function(err){
 			    	alert('unable to signin');
 		    	})
@@ -59,7 +59,7 @@
 
 		$scope.logout = function(){
 			store.remove('profile');
-			store.remove('token');+
+			store.remove('token');
 			auth.signout();
 		};
 
@@ -92,8 +92,7 @@
 		}
 		$scope.selectContinue = function(){
 			if ($scope.totalQuestions == $scope.activeQuestion+1){
-				//$scope.myAnswers.merge($scope.test);
-				$http.post('http://api.japher.org/test/answers',$scope.myAnswers),(function(message){
+				$http.post('http://quizapi.pamelalim.me/test/answers',$scope.myAnswers),(function(response){
 					alert(message);
 				})
 			}			
