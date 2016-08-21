@@ -23,6 +23,7 @@ body { background-color: #fff; padding: 20px; }
 #mathQuiz h2 { font-size: 3em; margin: 0px; font-weight: 100;}
 #mathQuiz h3 { font-size: 2.4em; margin: 0px; font-weight: 100;}
 #mathQuiz p { margin:0px 0px 14px 0px;}
+#mathQuiz p span { margin:0px 0px 10px 0px; font-size:0.8em;}
 #mathQuiz .btn {
 	display: inline-block; cursor: pointer; background-color: #c04b01;
 	color: #fff; text-decoration: none;
@@ -60,7 +61,7 @@ body { background-color: #fff; padding: 20px; }
 /* Questions */
 #mathQuiz .question { width: 550px; position: absolute; top:170px; left: 660px}
 #mathQuiz .question .txt { font-size: 1.4em; margin: 0px 0px 20px 0px; }
-#mathQuiz .question .question_image { min-height:200px; background-repeat:no-repeat; background-position:center; background-size:80% 100%;}
+#mathQuiz .question .question_image { max-height:200px; position:center; width:auto;}
 #mathQuiz .question .ans { 
 	display: inline-block;
 	font-size: 1.1em;
@@ -70,6 +71,13 @@ body { background-color: #fff; padding: 20px; }
 	padding:10px;
 	margin: 0px 15px 15px 0px;
 	position: relative;
+}
+
+#mathQuiz .question .ans.image {
+	width:225px;
+	min-height:220px; padding: 0px;
+	background-repeat: no-repeat;
+	background-position: 0px 0px;
 }
 
 #mathQuiz .question .ans.selected { border-color: #be4616 }
@@ -91,11 +99,6 @@ body { background-color: #fff; padding: 20px; }
 #mathQuiz .question.unanswered .ans {cursor:pointer;}
 #mathQuiz .question.unanswered .ans:hover {background-color: rgba(238,189,102,0.2);}
 #mathQuiz .question.answered .ans {cursor:default;}
-#mathQuiz .question .ans.image {
-	min-height:60px; padding: 0px;
-	background-repeat: no-repeat;
-	background-position: 0px 0px;
-}
 
 /* Feedback */
 #mathQuiz .feedback { color: #efbe5e; margin-top: 10px; transition: opacity 1.5s, margin-top 1.5s;
@@ -121,7 +124,7 @@ visibility: hidden; opacity: 0;}
 #mathQuiz .results .share a.btn.twitter { background-color: #59adeb;}
 #mathQuiz .results a.btn.end { background-color: #960000; }
 
-#mathQuiz .active, #mathQuiz .inactive { transition:left 1s ease-in-out;}
+#mathQuiz .active, #mathQuiz .inactive { transition:left 0.5s ease-in-out;}
 #mathQuiz .active { left: 40px;}
 #mathQuiz .intro.inactive, #mathQuiz.inactive.answered {left:-1350px; }
 
@@ -143,7 +146,7 @@ visibility: hidden; opacity: 0;}
 	#mathQuiz .question .txt {font-size: 1.2em; margin 0px 0px 20px 0px; background-size:80% 100%;}
 	#mathQuiz .question .question_image { min-height:120px; background-repeat:no-repeat; background-position:center; background-size:80% 100%;}
 	#mathQuiz .question .ans {font-size: 1em; padding: 5px 10px; margin-bottom: 10px; }
-	#mathQuiz .question .ans.image {min-height: 45px; background-size: auto 45px;}
+	#mathQuiz .question .ans.image {max-height: 60px; background-size: auto 45px;}
 	#mathQuiz .question .ans.image:hover {background-color:  #000;}
 
 	#mathQuiz .results {width: 260px; top: 150px; left: 330px;}

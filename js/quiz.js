@@ -1,5 +1,5 @@
 (function(){
-	var	app = angular.module('mathQuiz', ['auth0', 'angular-storage', 'angular-jwt', 'ngRoute']);
+	var	app = angular.module('mathQuiz', ['katex','auth0', 'angular-storage', 'angular-jwt', 'ngRoute']);
 	app.controller('QuizController',
 	 ['$scope', '$http', '$sce', 'auth', 'store', function($scope, $http, $sce, auth, store){
 		$scope.score = 0;
@@ -7,35 +7,40 @@
 		$scope.activeQuestionAnswered = 0;
 		$scope.percentage = 0;
 		$scope.myAnswers ={'question_id':[], 'answer':[]};
-
+		$scope.anything={pow: 'the following is squared: \\(x^2\\)'};
 		// function to get questions
-		getQuestions = function(questionUrl){
-		    $http.get(questionUrl).then(function(response){
-		    	$scope.myQuestions =[];
-		    	$scope.myAnswers['test'] = response.data.test.id;
-		    	var questions = response.data.questions;
-			    for(var i=0; i<questions.length; i++){
-			    	$scope.myQuestions.push({
-			    		"id": questions[i].id,
-			    		"question":questions[i].question,
-			    		"question_image":questions[i].question_image,
-			    		"answers":[{"id":0, "text":questions[i].answer0, "image":questions[i].answer0_image},
-								  {"id":1, "text":questions[i].answer1, "image":questions[i].answer1_image},
-								  {"id":2, "text":questions[i].answer2, "image":questions[i].answer2_image},
-								  {"id":3, "text":questions[i].answer3, "image":questions[i].answer3_image}],
-						"correct" : questions[i].correct_answer			    					
-			    	});
+		getQuestions = function(questionUrl, $answers){
+		    $http.post(questionUrl,$answers ).then(function(response){
+		    	if (response.data.code == 203) {
+		    		getQuestions(questionUrl,$answers);
+		    	} else {
+				    console.log(response.data);
+					$scope.myQuestions =[];
+			    	$scope.myAnswers['test'] = response.data.test.id;
+			    	var questions = response.data.questions;
+				    for(var i=0; i<questions.length; i++){
+				    	$scope.myQuestions.push({
+				    		"id": questions[i].id,
+				    		"question":questions[i].question,
+				    		"question_image":questions[i].question_image,
+				    		"answers":[{"id":0, "text":questions[i].answer0, "image":questions[i].answer0_image},
+									  {"id":1, "text":questions[i].answer1, "image":questions[i].answer1_image},
+									  {"id":2, "text":questions[i].answer2, "image":questions[i].answer2_image},
+									  {"id":3, "text":questions[i].answer3, "image":questions[i].answer3_image}],
+							"correct" : questions[i].correct_answer			    					
+				    	});
+				    }
+					$scope.totalQuestions = $scope.myQuestions.length;
+			        $scope.activeQuestion = 0;
 			    }
-				$scope.totalQuestions = $scope.myQuestions.length;
 			});
-	        $scope.activeQuestion = 0;
 		}
 
 		// login and then get the questions from api
 		$scope.login = function(){
 		    // Set popup to true to use popup
 		    if (auth.isAuthenticated){
-				getQuestions('http://quizapi.pamelalim.me/test/protected');
+				getQuestions('http://localhost:8000/test/protected','');
 		    }
 		    else {
 		    	auth.signin({
@@ -49,7 +54,7 @@
 		    	}, function(profile, token){
 			        store.set('profile', profile);
 			        store.set('token', token);
-			        getQuestions('http://quizapi.pamelalim.me/test/protected');
+			        getQuestions('http://localhost:8000/test/protected','');
 			    }, function(err){
 			    	alert('unable to signin');
 		    	})
@@ -92,11 +97,8 @@
 		}
 		$scope.selectContinue = function(){
 			if ($scope.totalQuestions == $scope.activeQuestion+1){
-				$http.post('http://quizapi.pamelalim.me/test/answers',$scope.myAnswers),(function(response){
-					alert(message);
-				})
-			}			
-
+				getQuestions('http://localhost:8000/test/answers',$scope.myAnswers);
+			} else			
 			return $scope.activeQuestion += 1;
 		}
 		$scope.createShareLinks = function(percentage){
