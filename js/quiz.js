@@ -40,7 +40,7 @@
 		$scope.login = function(){
 		    // Set popup to true to use popup
 		    if (auth.isAuthenticated){
-				getQuestions('http://localhost:8000/test/protected','');
+				getQuestions('http://quizapi.pamelalim.me/test/protected','');
 		    }
 		    else {
 		    	auth.signin({
@@ -54,7 +54,7 @@
 		    	}, function(profile, token){
 			        store.set('profile', profile);
 			        store.set('token', token);
-			        getQuestions('http://localhost:8000/test/protected','');
+			        getQuestions('http://quizapi.pamelalim.me/test/protected','');
 			    }, function(err){
 			    	alert('unable to signin');
 		    	})
@@ -97,7 +97,7 @@
 		}
 		$scope.selectContinue = function(){
 			if ($scope.totalQuestions == $scope.activeQuestion+1){
-				getQuestions('http://localhost:8000/test/answers',$scope.myAnswers);
+				getQuestions('http://quizapi.pamelalim.me/test/answers',$scope.myAnswers);
 			} else			
 			return $scope.activeQuestion += 1;
 		}
