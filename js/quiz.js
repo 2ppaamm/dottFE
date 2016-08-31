@@ -1,22 +1,22 @@
 (function(){
 	var	app = angular.module('mathQuiz', ['katex','auth0', 'angular-storage', 'angular-jwt', 'ngRoute']);
 	app.controller('QuizController',
-	 ['$scope', '$http', '$sce', 'auth', 'store', function($scope, $http, $sce, auth, store){
+	 ['$scope', '$http', '$sce', 'auth', 'store', 'katexConfig', function($scope, $http, $sce, auth, store, katexConfig){
+    	$scope.newMessage = 'This is on the same line with a dollar sign: $\\frac23$';
+	 	$scope.baseurl = "http://quizapi.pamelalim.me"
 		$scope.score = 0;
 		$scope.activeQuestion = -1;
 		$scope.activeQuestionAnswered = 0;
 		$scope.percentage = 0;
 		$scope.myAnswers ={'question_id':[], 'answer':[]};
-		$scope.anything={pow: 'the following is squared: \\(x^2\\)'};
 		// function to get questions
 		getQuestions = function(questionUrl, $answers){
 		    $http.post(questionUrl,$answers ).then(function(response){
 		    	if (response.data.code == 203) {
 		    		getQuestions(questionUrl,$answers);
 		    	} else {
-				    console.log(response.data);
 					$scope.myQuestions =[];
-			    	$scope.myAnswers['test'] = response.data.test.id;
+			    	$scope.myAnswers['test'] = response.data.test;
 			    	var questions = response.data.questions;
 				    for(var i=0; i<questions.length; i++){
 				    	$scope.myQuestions.push({
@@ -27,9 +27,11 @@
 									  {"id":1, "text":questions[i].answer1, "image":questions[i].answer1_image},
 									  {"id":2, "text":questions[i].answer2, "image":questions[i].answer2_image},
 									  {"id":3, "text":questions[i].answer3, "image":questions[i].answer3_image}],
-							"correct" : questions[i].correct_answer			    					
+							"correct" : questions[i].correct_answer,
+							"type": questions[i].type_id			    					
 				    	});
 				    }
+
 					$scope.totalQuestions = $scope.myQuestions.length;
 			        $scope.activeQuestion = 0;
 			    }
@@ -40,21 +42,21 @@
 		$scope.login = function(){
 		    // Set popup to true to use popup
 		    if (auth.isAuthenticated){
-				getQuestions('http://quizapi.pamelalim.me/test/protected','');
+				getQuestions($scope.baseurl+'/qa','');
 		    }
 		    else {
 		    	auth.signin({
 		    		popup: true,
 		            title: "Login me in",
 		            gravatar:false,
-		            icon: "http://www.all-gifted.com/images/allgifted-smalllogo.jpg",
+		            icon: "http://school.all-gifted.com/pluginfile.php/1/theme_lambda/logo/1472088488/newlogo.png",
 		            authParams: {
 		                scope: 'openid email name picture' 
 		            }		    		
 		    	}, function(profile, token){
 			        store.set('profile', profile);
 			        store.set('token', token);
-			        getQuestions('http://quizapi.pamelalim.me/test/protected','');
+			        getQuestions($scope.baseurl+'/qa','');
 			    }, function(err){
 			    	alert('unable to signin');
 		    	})
@@ -70,20 +72,30 @@
 
 		$scope.selectAnswer = function(qIndex, aIndex){
 			var questionState = $scope.myQuestions[qIndex].questionState;
+			// check if answered
 			if (questionState != 'answered'){
-				$scope.myQuestions[qIndex].selectedAnswer=aIndex;
-				var correctAnswer = $scope.myQuestions[qIndex].correct;
-
-				$scope.myQuestions[qIndex].correctAnswer = correctAnswer;
-
 				$scope.myAnswers['question_id'].push($scope.myQuestions[qIndex].id);
-				$scope.myAnswers['answer'].push(aIndex);
-
-				if (aIndex === correctAnswer){
-					$scope.myQuestions[qIndex].correctness = 'correct';
-					$scope.score += 1;	
-				} else {
-					$scope.myQuestions[qIndex].correctness = 'incorrect';
+				if ($scope.myQuestions[qIndex].type == 1) {
+					$scope.myQuestions[qIndex].selectedAnswer=aIndex;
+					var correctAnswer = $scope.myQuestions[qIndex].correct;
+					$scope.myQuestions[qIndex].correctAnswer = correctAnswer;
+					$scope.myAnswers['answer'].push(aIndex);
+					if (aIndex === correctAnswer){
+						$scope.myQuestions[qIndex].correctness = 'correct';
+						$scope.score += 1;	
+					} else {
+						$scope.myQuestions[qIndex].correctness = 'incorrect';
+					}
+				} else if ($scope.myQuestions[qIndex].type == 2) {
+					if ($scope.myQuestions[qIndex].answers[0].text != $scope.myAnswers.answer[qIndex][0] ||
+						$scope.myQuestions[qIndex].answers[1].text != $scope.myAnswers.answer[qIndex][1] ||
+						$scope.myQuestions[qIndex].answers[2].text != $scope.myAnswers.answer[qIndex][2] ||
+						$scope.myQuestions[qIndex].answers[3].text != $scope.myAnswers.answer[qIndex][3]) {
+						$scope.myQuestions[qIndex].correctness = 'incorrect';
+					} else {
+						$scope.myQuestions[qIndex].correctness = 'correct';
+						$scope.score += 1;							
+					}
 				}
 				$scope.myQuestions[qIndex].questionState = 'answered';
 			}
@@ -97,7 +109,7 @@
 		}
 		$scope.selectContinue = function(){
 			if ($scope.totalQuestions == $scope.activeQuestion+1){
-				getQuestions('http://quizapi.pamelalim.me/test/answers',$scope.myAnswers);
+				getQuestions($scope.baseurl+'/qa/answer',$scope.myAnswers);
 			} else			
 			return $scope.activeQuestion += 1;
 		}
@@ -108,6 +120,13 @@
 			var newMarkup = emailLink + twitterLink;
 			return $sce.trustAsHtml(newMarkup);
 		}
+	  katexConfig.defaultOptions.delimiters = 
+	  [
+	      {left: "$$", right: "$$", display: false},
+	      {left: "\\[", right: "\\]", display: true},
+	      {left: "\\(", right: "\\)", display: false},
+	      {left: "$", right: "$", display: true}
+	  ];    
 
 	}]);
 

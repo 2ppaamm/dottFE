@@ -30,6 +30,12 @@ body { background-color: #fff; padding: 20px; }
 	padding: 5px 15px;
 }
 
+#mathQuiz .keybtn {
+	display: inline-block; cursor: pointer; background-color: green;
+	color: #fff; text-decoration: none;
+	padding: 5px 15px;
+}
+
 /* Progress Bar */
 #mathQuiz .progress {width: 550px; position: absolute;top:120px; left: 40px}
 #mathQuiz .progress div {
@@ -62,6 +68,18 @@ body { background-color: #fff; padding: 20px; }
 #mathQuiz .question { width: 550px; position: absolute; top:170px; left: 660px}
 #mathQuiz .question .txt { font-size: 1.4em; margin: 0px 0px 20px 0px; }
 #mathQuiz .question .question_image { max-height:200px; position:center; width:auto;}
+
+#mathQuiz .question .keyans { 
+	display: inline-block;
+	font-size: 1.1em;
+	width: 225px;
+	border: 2px solid rgba(238,189,102,.4); 
+	border-radius: 6px;
+	padding:10px;
+	margin: 0px 15px 15px 0px;
+	position: relative;
+}
+
 #mathQuiz .question .ans { 
 	display: inline-block;
 	font-size: 1.1em;
@@ -75,7 +93,7 @@ body { background-color: #fff; padding: 20px; }
 
 #mathQuiz .question .ans.image {
 	width:225px;
-	min-height:220px; padding: 0px;
+	min-height:110px; padding: 0px;
 	background-repeat: no-repeat;
 	background-position: 0px 0px;
 }
