@@ -4,7 +4,7 @@ body { background-color: #fff; padding: 20px; }
 
 #mathQuiz {
    font-family: 'Roboto', sans-serif; font-size: 16px; font-weight: 400;
-	width: 650px; height: 650px;
+	width: 650px; height: 1000px;
 	position: relative;
 	overflow: hidden;;
 	color: #fff;
@@ -66,7 +66,7 @@ body { background-color: #fff; padding: 20px; }
 #mathQuiz .btn { background-color:#960000; }
 /* Questions */
 #mathQuiz .question { width: 550px; position: absolute; top:170px; left: 660px}
-#mathQuiz .question .txt { font-size: 1.4em; margin: 0px 0px 20px 0px; }
+#mathQuiz .question .txt { font-size: 1em; margin: 0px 0px 20px 0px; }
 #mathQuiz .question .question_image { max-height:200px; position:center; width:auto;}
 
 #mathQuiz .question .keyans { 

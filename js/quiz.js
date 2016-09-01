@@ -2,22 +2,30 @@
 	var	app = angular.module('mathQuiz', ['katex','auth0', 'angular-storage', 'angular-jwt', 'ngRoute']);
 	app.controller('QuizController',
 	 ['$scope', '$http', '$sce', 'auth', 'store', 'katexConfig', function($scope, $http, $sce, auth, store, katexConfig){
-    	$scope.newMessage = 'This is on the same line with a dollar sign: $\\frac23$';
-	 	$scope.baseurl = "http://quizapi.pamelalim.me"
+	 	$scope.baseurl = "http://localhost:8000"
 		$scope.score = 0;
 		$scope.activeQuestion = -1;
 		$scope.activeQuestionAnswered = 0;
 		$scope.percentage = 0;
+		$scope.maxile = 0;
 		$scope.myAnswers ={'question_id':[], 'answer':[]};
 		// function to get questions
 		getQuestions = function(questionUrl, $answers){
 		    $http.post(questionUrl,$answers ).then(function(response){
-		    	if (response.data.code == 203) {
+		    	if (response.data.code == 206) {
+		    		$scope.percentage = response.data.percentage;
+		    		$scope.score = response.data.score;
+		    		$scope.maxile = response.data.maxile;
+					$scope.totalQuestions = 0;
+			        $scope.activeQuestion = 0;
+			        $scope.myQuestions = [];
+		    	} else if (response.data.code == 203) {
 		    		getQuestions(questionUrl,$answers);
 		    	} else {
 					$scope.myQuestions =[];
 			    	$scope.myAnswers['test'] = response.data.test;
 			    	var questions = response.data.questions;
+			    	console.log(response.data.questions);
 				    for(var i=0; i<questions.length; i++){
 				    	$scope.myQuestions.push({
 				    		"id": questions[i].id,
@@ -99,7 +107,7 @@
 				}
 				$scope.myQuestions[qIndex].questionState = 'answered';
 			}
-			$scope.percentage = ($scope.score / $scope.totalQuestions)*100;
+//			$scope.percentage = ($scope.score / $scope.totalQuestions)*100;
 		}
 		$scope.isSelected = function(qIndex,aIndex){
 			return $scope.myQuestions[qIndex].selectedAnswer === aIndex;
