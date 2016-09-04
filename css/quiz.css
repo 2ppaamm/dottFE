@@ -23,7 +23,7 @@ body { background-color: #fff; padding: 20px; }
 #mathQuiz h2 { font-size: 3em; margin: 0px; font-weight: 100;}
 #mathQuiz h3 { font-size: 2.4em; margin: 0px; font-weight: 100;}
 #mathQuiz p { margin:0px 0px 14px 0px;}
-#mathQuiz p span { margin:0px 0px 10px 0px; font-size:0.8em;}
+#mathQuiz p span { margin:0px 0px 10px 0px;}
 #mathQuiz .btn {
 	display: inline-block; cursor: pointer; background-color: #c04b01;
 	color: #fff; text-decoration: none;
@@ -66,7 +66,7 @@ body { background-color: #fff; padding: 20px; }
 #mathQuiz .btn { background-color:#960000; }
 /* Questions */
 #mathQuiz .question { width: 550px; position: absolute; top:170px; left: 660px}
-#mathQuiz .question .txt { font-size: 1em; margin: 0px 0px 20px 0px; }
+#mathQuiz .question .txt { font-size: 1.4em; margin: 0px 0px 20px 0px; }
 #mathQuiz .question .question_image { max-height:200px; position:center; width:auto;}
 
 #mathQuiz .question .keyans { 

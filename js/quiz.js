@@ -2,7 +2,7 @@
 	var	app = angular.module('mathQuiz', ['katex','auth0', 'angular-storage', 'angular-jwt', 'ngRoute']);
 	app.controller('QuizController',
 	 ['$scope', '$http', '$sce', 'auth', 'store', 'katexConfig', function($scope, $http, $sce, auth, store, katexConfig){
-	 	$scope.baseurl = "http://quizapi.pamelalim.me"
+	 	$scope.baseurl = "http://localhost:8000"
 		$scope.score = 0;
 		$scope.activeQuestion = -1;
 		$scope.activeQuestionAnswered = 0;
@@ -11,6 +11,7 @@
 		$scope.myAnswers ={'question_id':[], 'answer':[]};
 		// function to get questions
 		getQuestions = function(questionUrl, $answers){
+			$scope.myAnswers ={'question_id':[], 'answer':[]};
 		    $http.post(questionUrl,$answers ).then(function(response){
 		    	if (response.data.code == 206) {
 		    		$scope.percentage = response.data.percentage;
@@ -25,7 +26,6 @@
 					$scope.myQuestions =[];
 			    	$scope.myAnswers['test'] = response.data.test;
 			    	var questions = response.data.questions;
-			    	console.log(response.data.questions);
 				    for(var i=0; i<questions.length; i++){
 				    	$scope.myQuestions.push({
 				    		"id": questions[i].id,
@@ -118,7 +118,7 @@
 		$scope.selectContinue = function(){
 			if ($scope.totalQuestions == $scope.activeQuestion+1){
 				getQuestions($scope.baseurl+'/qa/answer',$scope.myAnswers);
-			} else			
+			} else
 			return $scope.activeQuestion += 1;
 		}
 		$scope.createShareLinks = function(percentage){

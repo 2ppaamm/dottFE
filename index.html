@@ -43,7 +43,7 @@
 						class="ans"></div>						
 				</div>
 				<div ng-show="myQuestion.type == 2">
-					<input type="number" required
+					<input type="number" step="0.001" required
 					ng-show = "Answer.text != null"
 					ng-repeat="Answer in myQuestions[$index].answers" placeholder="Your Answer for ({{$index+1}})"
 					ng-model="myAnswers.answer[$parent.$index][$index]" class="keyans"/>
