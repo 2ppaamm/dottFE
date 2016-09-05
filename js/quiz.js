@@ -50,7 +50,7 @@
 		$scope.login = function(){
 		    // Set popup to true to use popup
 		    if (auth.isAuthenticated){
-				getQuestions($scope.baseurl+'/qa','');
+				getQuestions($scope.baseurl+'/test/protected','');
 		    }
 		    else {
 		    	auth.signin({
@@ -64,7 +64,7 @@
 		    	}, function(profile, token){
 			        store.set('profile', profile);
 			        store.set('token', token);
-			        getQuestions($scope.baseurl+'/qa','');
+			        getQuestions($scope.baseurl+'/test/protected','');
 			    }, function(err){
 			    	alert('unable to signin');
 		    	})
@@ -117,7 +117,7 @@
 		}
 		$scope.selectContinue = function(){
 			if ($scope.totalQuestions == $scope.activeQuestion+1){
-				getQuestions($scope.baseurl+'/qa/answer',$scope.myAnswers);
+				getQuestions($scope.baseurl+'/test/answers',$scope.myAnswers);
 			} else
 			return $scope.activeQuestion += 1;
 		}
