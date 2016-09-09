@@ -50,7 +50,7 @@ body { background-color: #fff; padding: 20px; }
 	height: 30px;
 	margin-right: 30px;
 	border-radius: 50%;
-	background-color: rgba(255, 255, 255, .2);
+	background-color: rgba(0, 0, 0, .2);
 	transition: background-color 1s;
 }
 
@@ -127,7 +127,7 @@ body { background-color: #fff; padding: 20px; }
 #mathQuiz .feedback { color: #efbe5e; margin-top: 10px; transition: opacity 1.5s, margin-top 1.5s;
 visibility: hidden; opacity: 0;}
 #mathQuiz .feedback .btn { margin-top:  5px; }
-#mathQuiz .feedback strong {color: #fff}
+#mathQuiz .feedback strong {color: #000}
 
 #mathQuiz .answered .feedback { visibility: visible; opacity: 1; margin-top: 10px}
 
