@@ -2,7 +2,7 @@
 	var	app = angular.module('mathQuiz', ['katex','auth0', 'angular-storage', 'angular-jwt', 'ngRoute']);
 	app.controller('QuizController',
 	 ['$scope', '$http', '$sce', 'auth', 'store', 'katexConfig', function($scope, $http, $sce, auth, store, katexConfig){
-	 	$scope.baseurl = "http://quizapi.pamelalim.me"
+	 	$scope.baseurl = "http://localhost:8000"
 		$scope.score = 0;
 		$scope.activeQuestion = -1;
 		$scope.activeQuestionAnswered = 0;
@@ -26,6 +26,9 @@
 					$scope.myQuestions =[];
 			    	$scope.myAnswers['test'] = response.data.test;
 			    	var questions = response.data.questions;
+			    	if (questions === undefined) {
+			    		alert("no questions found");
+			    	}
 				    for(var i=0; i<questions.length; i++){
 				    	$scope.myQuestions.push({
 				    		"id": questions[i].id,
@@ -50,7 +53,7 @@
 		$scope.login = function(){
 		    // Set popup to true to use popup
 		    if (auth.isAuthenticated){
-				getQuestions($scope.baseurl+'/qa','');
+				getQuestions($scope.baseurl+'/test/protected','');
 		    }
 		    else {
 		    	auth.signin({
@@ -64,7 +67,7 @@
 		    	}, function(profile, token){
 			        store.set('profile', profile);
 			        store.set('token', token);
-			        getQuestions($scope.baseurl+'/qa','');
+			        getQuestions($scope.baseurl+'/test/protected','');
 			    }, function(err){
 			    	alert('unable to signin');
 		    	})
@@ -117,7 +120,7 @@
 		}
 		$scope.selectContinue = function(){
 			if ($scope.totalQuestions == $scope.activeQuestion+1){
-				getQuestions($scope.baseurl+'/qa/answer',$scope.myAnswers);
+				getQuestions($scope.baseurl+'/test/answers',$scope.myAnswers);
 			} else
 			return $scope.activeQuestion += 1;
 		}
@@ -132,8 +135,7 @@
 	  [
 	      {left: "$$", right: "$$", display: false},
 	      {left: "\\[", right: "\\]", display: true},
-	      {left: "\\(", right: "\\)", display: false},
-	      {left: "$", right: "$", display: true}
+	      {left: "\\(", right: "\\)", display: false}
 	  ];    
 
 	}]);

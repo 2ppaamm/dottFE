@@ -6,13 +6,14 @@
 		<title>Adaptive Math Test</title>
 		<link rel="stylesheet" type="text/css" href="css/quiz.css">
 		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.css">
+		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 		<!-- Auth0's lock widget library -->
 		<script type="text/javascript" src="https://cdn.auth0.com/js/lock-9.2.min.js"></script>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 	</head>
 	<body>
 		<div id="mathQuiz" ng-controller="QuizController">
-			<h1>All Gifted Adaptive Test<span>Math</span></h1>
+			<h1>All Gifted<span>Mathematics</span></h1>
 			<div class="progress">
 				<div class="
 				{{($index === activeQuestion) ? 'on':'off'}}
@@ -22,8 +23,8 @@
 			</div>
 			<div class="intro {{ (activeQuestion > -1) ? 'inactive' :'active'}}">
 				<h2>Welcome</h2> <!-- Use auto-render -->
-					<p>Click begin to start your Math test</p>
-					<div ng-click="login()" class="btn">Begin</div>
+					<p>Click to start Adaptive Kindergarten to Primary Six Math course</p>
+					<div ng-click="login()" class="startbtn">START <i class="fa fa-chevron-right"></i></div>
 			</div>
 			<div class="question 
 				{{ $index === activeQuestion ? 'active':'inactive'}} {{ myQuestion.questionState === 'answered' ? 'answered':'unanswered'}}" ng-repeat="myQuestion in myQuestions">
@@ -63,6 +64,7 @@
 				<div class="share" ng-bind-html = "createShareLinks(percentage)"></div>
 				<div><a ng-click="logout()" class="btn end" href="#">End Test</a></div>
 			</div>
+			<div class="footer">All Gifted Copyright Reserved from 2014</div>
 		</div>
 		<script type="text/javascript" src="js/angular.min.js"></script>
 		<!-- Angular cookie wrapper library for client cookies -->
