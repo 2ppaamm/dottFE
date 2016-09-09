@@ -7,21 +7,21 @@ body { background-color: #fff; padding: 20px; }
 	width: 650px; height: 1000px;
 	position: relative;
 	overflow: hidden;;
-	color: #fff;
-	background:#000 url() no-repeat 0px 0px;
+	color: #000;
+	background:#fff url(/background_logo.png) no-repeat 0px 0px;
 }
 
 #mathQuiz h1 {
 	font-weight: 100; font-size: 1.5em; text-transform: uppercase; margin: 0px;
-	position: absolute; top: 25px; left: 36px;
+	position: absolute; top: 25px; left: 36px; color:#960000;
 }
 
 #mathQuiz h1 span {
 	display: block; font-family: 'Titillium Web', sans-serif;
-	font-size: 3em; line-height: 55px;
+	font-size: 2.5em; line-height: 55px; color:#000;
 }
-#mathQuiz h2 { font-size: 3em; margin: 0px; font-weight: 100;}
-#mathQuiz h3 { font-size: 2.4em; margin: 0px; font-weight: 100;}
+#mathQuiz h2 { font-size: 2.5em; margin: 0px; font-weight: 100;}
+#mathQuiz h3 { font-size: 2.1em; margin: 0px; font-weight: 100;}
 #mathQuiz p { margin:0px 0px 14px 0px;}
 #mathQuiz p span { margin:0px 0px 10px 0px;}
 #mathQuiz .btn {
@@ -29,7 +29,6 @@ body { background-color: #fff; padding: 20px; }
 	color: #fff; text-decoration: none;
 	padding: 5px 15px;
 }
-
 #mathQuiz .startbtn {
 	display: inline-block; cursor: pointer; background-color: #960000;
 	color: #fff; text-decoration: none;
@@ -151,17 +150,12 @@ visibility: hidden; opacity: 0;}
 #mathQuiz .active, #mathQuiz .inactive { transition:left 0.5s ease-in-out;}
 #mathQuiz .active { left: 40px;}
 #mathQuiz .intro.inactive, #mathQuiz.inactive.answered {left:-1350px; }
-#mathQuiz .footer {
-    position:fixed;
-    bottom:0;
-    color:#666;
-    font-size: 0.7em;
-}
+#mathQuiz .footer { position:fixed; bottom: 0; color:#666; font-size: 0.7em;}
 
 @media screen and (max-width: 650px){
 	body {padding: 0px; margin: 0px;}
 	#mathQuiz {width:320px; background-size: 320px auto; }
-	#mathQuiz h1 { width:300px;  font-size: 1.3em; top: 25px; left:25px;}
+	#mathQuiz h1 { width:300px;  font-size: 1em; top: 25px; left:25px;}
 	#mathQuiz h1 span { line-height: 43px;	}
 	#mathQuiz h2 {margin: 0px;}
 	#mathQuiz h3 { font-size: 2.2em; margin-bottom: 15px;}
