@@ -20,8 +20,8 @@ body { background-color: #fff; padding: 20px; }
 	display: block; font-family: 'Titillium Web', sans-serif;
 	font-size: 3em; line-height: 55px; color:#000;
 }
-#mathQuiz h2 { font-size: 3em; margin: 0px; font-weight: 100;}
-#mathQuiz h3 { font-size: 2.4em; margin: 0px; font-weight: 100;}
+#mathQuiz h2 { font-size: 2.5em; margin: 0px; font-weight: 100;}
+#mathQuiz h3 { font-size: 2.1em; margin: 0px; font-weight: 100;}
 #mathQuiz p { margin:0px 0px 14px 0px;}
 #mathQuiz p span { margin:0px 0px 10px 0px;}
 #mathQuiz .btn {
