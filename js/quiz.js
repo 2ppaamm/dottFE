@@ -240,7 +240,7 @@
 			return store.get('token');
 		}
 	    jwtOptionsProvider.config({
-	      whiteListedDomains: ['math.all-gifted.com', 'localhost', 'quizapi.pamelalim.me']
+	      whiteListedDomains: ['math.all-gifted.com', 'quizapi.pamelalim.me']
 	    });
 		$httpProvider.interceptors.push('jwtInterceptor');
 	});
