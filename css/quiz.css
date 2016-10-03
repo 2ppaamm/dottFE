@@ -84,7 +84,7 @@ body { background-color: #fff; padding: 20px; }
 /* Questions */
 #mathQuiz .question { width: 550px; position: absolute; top:170px; left: 660px;}
 #mathQuiz .question .txt { font-size: 1.4em; margin: 0px 0px 20px 0px; }
-#mathQuiz .question .question_image { position:center; width:100%;}
+#mathQuiz .question .question_image { position:center; width:80%;}
 #mathQuiz .question .inactive{display:none;}
 
 #mathQuiz .question .keyans { 
