@@ -2,7 +2,7 @@
 	var	app = angular.module('mathQuiz', ['katex','auth0', 'angular-storage', 'angular-jwt', 'ngRoute','ngLoadingSpinner']);
 	app.controller('QuizController',
 	 ['$scope', '$http', '$sce', 'auth', 'store', 'katexConfig', function($scope, $http, $sce, auth, store, katexConfig){
-	 	$scope.baseurl = "http://quizapi.pamelalim.me"
+	 	$scope.baseurl = "http://localhost:8000"
 		$scope.score = 0;
 		$scope.activeQuestion = -1;
 		$scope.activeQuestionAnswered = 0;
@@ -252,7 +252,7 @@
 
 	}]);
 
-	app.config( function(authProvider, $httpProvider, jwtInterceptorProvider) {
+	app.config( function(authProvider, $httpProvider, jwtInterceptorProvider, jwtOptionsProvider) {
 		authProvider.init({
 		    domain: 'pamelalim.auth0.com',
 		    clientID: 'eVJv6UFM9GVdukBWiURczRCxmb6iaUYG'
@@ -261,7 +261,9 @@
 		jwtInterceptorProvider.tokenGetter = function(store) {
 			return store.get('token');
 		}
-
+	    jwtOptionsProvider.config({
+	      whiteListedDomains: ['math.all-gifted.com', 'localhost']
+	    });
 		$httpProvider.interceptors.push('jwtInterceptor');
 	});
 
