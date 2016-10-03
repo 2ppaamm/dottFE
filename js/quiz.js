@@ -165,18 +165,6 @@
 			
 			return $scope.activeQuestion += 1;
 		}
-		$scope.showHideCorrect=function(qIndex){
-			if($scope.myQuestions[qIndex].correctness == 'correct')
-			{
-				
-				return true;
-				
-			}
-			else
-			{
-				return false;
-			}
-		}
 		
 		$scope.questionshowing = function(qIndex){
 			
@@ -197,16 +185,6 @@
 			if($scope.quests == '0')
 			{
 				
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		}
-		$scope.showHideinCorrect=function(qIndex){
-			if($scope.myQuestions[qIndex].crts == 'incorrect')
-			{
 				return true;
 			}
 			else

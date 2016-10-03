@@ -62,8 +62,8 @@
 					<p ng-click="selectAnswer($index,0)" class="keybtn">Submit</p>
 				</div>
 				<div class="feedback">
-					<p ng-show="showHideCorrect($index)">You are <strong>correct</strong>!</p>
-					<p ng-show="showHideinCorrect($index)">Oops! That is <strong>not correct.</strong></p>
+					<p ng-show="myQuestion.correctness === 'correct'">You are <strong>correct</strong>!</p>
+					<p ng-show="myQuestion.correctness === 'incorrect'">Oops! That is <strong>not correct.</strong></p>
 					<p>{{myQuestion.feedback}}</p>
 					<div class="btn" ng-click="selectContinue($index)" ng-show="continuetohide($index)">Continue</div>
 				</div>
