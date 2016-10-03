@@ -10,8 +10,10 @@
 		<!-- Auth0's lock widget library -->
 		<script type="text/javascript" src="https://cdn.auth0.com/js/lock-9.2.min.js"></script>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<link rel="icon" href="/faith.png">
 	</head>
 	<body>
+	<span us-spinner="{radius:30, width:8, length: 16}"></span>
 		<div id="mathQuiz" ng-controller="QuizController">
 			<h1>All Gifted<span>Mathematics</span></h1>
 			<div class="progress">
@@ -22,14 +24,23 @@
 				ng-repeat="myQuestion in myQuestions"></div>
 			</div>
 			<div class="intro {{ (activeQuestion > -1) ? 'inactive' :'active'}}">
-				<h2>Welcome</h2> <!-- Use auto-render -->
-					<p>Click to start Adaptive Kindergarten to Primary Six Math course</p>
-					<div ng-click="login()" class="startbtn">START <i class="fa fa-chevron-right"></i></div>
+				<div ng-if="!unenrolled">
+					<h2>Welcome</h2>
+ 					<p>Click to start Adaptive Kindergarten to Primary Six Math course</p>
+ 					<div ng-click="login()" class="startbtn">START <i class="fa fa-chevron-right"></i></div>
+				</div>
+				<div ng-if="unenrolled">
+					<h3>Mastercode Registration Needed<br> <input type="number" class="mastercode" ng-model="mastercode.mastercode" placeholder="Mastercode"></h3>
+					<p><input type="text" ng-model = "mastercode.firstname" placeholder="First Name" class="mastercode" required>
+					<input type="text" ng-model = "mastercode.lastname" placeholder="Last Name" class="mastercode" required>
+					<input type="date" ng-model = "mastercode.date_of_birth" placeholder="Birthdate in mm/dd/yyyy" class="mastercode" required></p>
+					<p ng-click="sendMastercode()" class="startbtn">SUBMIT <i class="fa fa-chevron-right"></i></p>
+				</div>
 			</div>
 			<div class="question 
-				{{ $index === activeQuestion ? 'active':'inactive'}} {{ myQuestion.questionState === 'answered' ? 'answered':'unanswered'}}" ng-repeat="myQuestion in myQuestions">
-				<div katex bind="myQuestion.question" auto-render class="txt"></div>
-				<p><img ng-if="myQuestion.question_image" class="question_image" src="{{baseurl}}{{myQuestion.question_image}}" /></p>
+				{{ $index === activeQuestion ? 'active':'inactive'}} {{ myQuestion.questionState === 'answered' ? 'answered':'unanswered'}}" ng-repeat="myQuestion in myQuestions" ng-show="questionshowing($index)" >
+				<div katex bind="myQuestion.question" auto-render class="txt" ></div>
+				<p><img ng-if="myQuestion.question_image" class="question_image" ng-src="{{baseurl}}{{myQuestion.question_image}}" onContextMenu="return false;"/></p>
 				<div ng-show="myQuestion.type == 1">
 					<div katex bind="Answer.text" auto-render
 						ng-repeat="Answer in myQuestions[$index].answers"
@@ -51,17 +62,17 @@
 					<p ng-click="selectAnswer($index,0)" class="keybtn">Submit</p>
 				</div>
 				<div class="feedback">
-					<p ng-show="myQuestion.correctness === 'correct'">You are <strong>correct</strong>!</p>
-					<p ng-show="myQuestion.correctness === 'incorrect'">Oops! That is <strong>not correct.</strong></p>
+					<p ng-show="showHideCorrect($index)">You are <strong>correct</strong>!</p>
+					<p ng-show="showHideinCorrect($index)">Oops! That is <strong>not correct.</strong></p>
 					<p>{{myQuestion.feedback}}</p>
-					<div class="btn" ng-click="selectContinue()">Continue</div>
+					<div class="btn" ng-click="selectContinue($index)" ng-show="continuetohide($index)">Continue</div>
 				</div>
 			</div>
-			<div class="results  {{(totalQuestions === activeQuestion) ? 'active' : 'inactive'}}">
+			<div class="results  {{(totalQuestions === activeQuestion) ? 'active' : 'inactive'}}" ng-show="resulting()">
 				<h3>Results</h3>
-				<p>You scored {{percentage}}% for the latest test<span ng-if="maxile > 0">, and now your maxile level is {{maxile}}</span>.</p>
+				<p>You scored {{percentage | number:2}}% for the latest test<span ng-if="maxile > 0">, and now your maxile level is {{maxile}}</span>.</p>
 				<p>Use the links below to report your achievement.</p>
-				<div class="share" ng-bind-html = "createShareLinks(percentage)"></div>
+				<div class="share" ng-bind-html = "createShareLinks(percentage)" compile-template></div>
 				<div><a ng-click="logout()" class="btn end" href="#">End Test</a></div>
 			</div>
 			<div class="footer">All Gifted Copyright Reserved from 2014</div>
@@ -71,6 +82,9 @@
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular-cookies.js"></script>
 		<!-- Angular's Router Library for SPA -->
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular-route.js"></script>
+		<script type="text/javascript" src="js/angular-loading-spinner.js"></script>
+		<script type="text/javascript" src="js/angular-spinner.min.js"></script>
+		<script type="text/javascript" src="js/spin.js"></script>
 		<!-- Auth0's Angular SDK Library -->
 		<script type="text/javascript" src="https://cdn.auth0.com/w2/auth0-angular-4.js"></script>
 		<!-- Angular wrapper for localStorage and sessionStorage. Defaults to ng-cookies if not available -->
@@ -84,17 +98,5 @@
 	    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.js"></script>
 	    <script src="//tfoxy.github.io/b/katex/dist/contrib/auto-render.min.js"></script>
 	    <script src="//tfoxy.github.io/b/angular-katex/angular-katex.min.js"></script>
-    <script>
-      renderMathInElement(
-          document.body,
-          {
-              delimiters: [
-                  {left: "$$", right: "$$", display: true},
-                  {left: "\\[", right: "\\]", display: true},
-                  {left: "$", right: "$", display: false},
-                  {left: "\\(", right: "\\)", display: false}
-              ]
-          }
-      );
-    </script>	</body>
+    </body>
 </html>
