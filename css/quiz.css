@@ -87,6 +87,17 @@ body { background-color: #fff; padding: 20px; }
 #mathQuiz .question .question_image { position:center; width:80%;}
 #mathQuiz .question .inactive{display:none;}
 
+#mathQuiz .question .lineinput { 
+	display: run-in;
+	font-size: 1.4em;
+	width: 100px;
+	border: 2px solid rgba(238,189,102,.4); 
+	border-radius: 6px;
+	padding:10px;
+	margin: 0px 15px 15px 0px;
+	position: relative;
+}
+
 #mathQuiz .question .keyans { 
 	display: inline-block;
 	font-size: 1.1em;

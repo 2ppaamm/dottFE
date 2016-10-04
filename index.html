@@ -24,12 +24,12 @@
 				ng-repeat="myQuestion in myQuestions"></div>
 			</div>
 			<div class="intro {{ (activeQuestion > -1) ? 'inactive' :'active'}}">
-				<div ng-if="!unenrolled">
+				<div ng-if="enrolled">
 					<h2>Welcome</h2>
  					<p>Click to start Adaptive Kindergarten to Primary Six Math course</p>
  					<div ng-click="login()" class="startbtn">START <i class="fa fa-chevron-right"></i></div>
 				</div>
-				<div ng-if="unenrolled">
+				<div ng-if="!enrolled">
 					<h3>Mastercode Registration Needed<br> <input type="number" class="mastercode" ng-model="mastercode.mastercode" placeholder="Mastercode"></h3>
 					<p><input type="text" ng-model = "mastercode.firstname" placeholder="First Name" class="mastercode" required>
 					<input type="text" ng-model = "mastercode.lastname" placeholder="Last Name" class="mastercode" required>
@@ -51,14 +51,10 @@
 							selected: isSelected($parent.$index, $index),
 							correct: isCorrect($parent.$index, $index)
 						}" 
-						ng-click="selectAnswer($parent.$index, $index)"
+						ng-click="selectAnswer($parent.$index, $index)" 
 						class="ans"></div>						
 				</div>
 				<div ng-show="myQuestion.type == 2">
-					<input type="number" step="0.001" required
-					ng-show = "Answer.text != null"
-					ng-repeat="Answer in myQuestions[$index].answers" placeholder="Your Answer for ({{$index+1}})"
-					ng-model="myAnswers.answer[$parent.$index][$index]" class="keyans"/>
 					<p ng-click="selectAnswer($index,0)" class="keybtn">Submit</p>
 				</div>
 				<div class="feedback">
