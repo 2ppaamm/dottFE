@@ -82,7 +82,7 @@
 		$scope.login = function(){
 		    // Set popup to true to use popup
 		    if (auth.isAuthenticated){
-				getQuestions($scope.baseurl+'/test/protected','');
+				getQuestions($scope.baseurl+'/qa','');
 				$scope.percentage=0;
 				$scope.quests = '1';
 				$scope.score=0;
@@ -99,7 +99,7 @@
 		    	}, function(profile, token){
 			        store.set('profile', profile);
 			        store.set('token', token);
-			        getQuestions($scope.baseurl+'/test/protected','');
+			        getQuestions($scope.baseurl+'/qa','');
 			    }, function(err){
 			    	alert('unable to signin');
 		    	})
@@ -164,7 +164,7 @@
 		$scope.selectContinue = function(qIndex){
 			$scope.myQuestions[qIndex].crts="abc";
 			if ($scope.totalQuestions == $scope.activeQuestion+1){
-				getQuestions($scope.baseurl+'/test/answers',$scope.myAnswers);
+				getQuestions($scope.baseurl+'/qa/answer',$scope.myAnswers);
 			} else
 			
 			return $scope.activeQuestion += 1;
@@ -209,7 +209,7 @@
 			return store.get('token');
 		}
 	    jwtOptionsProvider.config({
-	      whiteListedDomains: ['math.all-gifted.com', 'localhost', 'quizapi.pamelalim.me', 'quiz.all-gifted.com']
+	      whiteListedDomains: ['math.all-gifted.com', 'localhost', 'quizapi.pamelalim.me', 'quiz.all-gifted.com', 'quizdev.pamelalim.me']
 	    });
 		$httpProvider.interceptors.push('jwtInterceptor');
 	});
