@@ -152,7 +152,7 @@ body { background-color: #fff; width:100%;}
 #mathQuiz .footer span {font-size: 2.3em; color:black;}
 
 #mathQuiz #scientificCalc11 {position:fixed;bottom:2.3em; right:0px; background-color:#ddd;font-size: 13px;	margin: 0; color: #555;
-	font-weight:bold; font-family: 'Roboto', sans-serif;}
+	font-weight:bold; font-family: 'Roboto', sans-serif; z-index:1001;}
 #mathQuiz #scientificCalc11 input{ font-size:13px; font-weight:bold; padding:5px; margin:5px;}	
 #mathQuiz #scientificCalc11  cell{ width:20%;	font-weight:bold}
 #mathQuiz #scientificCalc11  #results{ width:250px;background-color:#CCC; height:1.5em; margin:5px;	padding:3px;}
