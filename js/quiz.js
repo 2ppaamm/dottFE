@@ -12,6 +12,8 @@
 		$scope.mastercode = {};
 		$scope.myAnswers ={'question_id':[], 'answer':[]};
 		$scope.quests='1';
+		$scope.scratchpad = false;
+		$scope.calculator = false;
 		
 		// function to get questions
 		getQuestions = function(questionUrl, $answers){
@@ -65,6 +67,15 @@
 			},function(err){
 				alert("Error in retrieving questions.");		
 			});
+		}
+
+		// turn scratchpad on/off
+		$scope.scratchpadSwitch = function(){
+			$scope.scratchpad = $scope.scratchpad ? false : true;
+		}	
+
+		$scope.calculatorSwitch = function(){
+			$scope.calculator = $scope.calculator ? false : true;
 		}
 
 		// login and then get the questions from api
@@ -198,7 +209,7 @@
 			return store.get('token');
 		}
 	    jwtOptionsProvider.config({
-	      whiteListedDomains: ['math.all-gifted.com', 'localhost', 'quizapi.pamelalim.me']
+	      whiteListedDomains: ['math.all-gifted.com', 'localhost', 'quizapi.pamelalim.me', 'quiz.all-gifted.com']
 	    });
 		$httpProvider.interceptors.push('jwtInterceptor');
 	});
