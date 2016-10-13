@@ -118,7 +118,7 @@
 			// check if answered
 			if (questionState != 'answered'){
 				$scope.myAnswers['question_id'].push($scope.myQuestions[qIndex].id);
-				$scope.myAnswers['answer'].push([]);
+//				$scope.myAnswers['answer'].push([]);
 				if ($scope.myQuestions[qIndex].type == 1) {
 					$scope.myQuestions[qIndex].selectedAnswer=aIndex;
 					var correctAnswer = $scope.myQuestions[qIndex].correct;
@@ -133,13 +133,18 @@
 						$scope.myQuestions[qIndex].crts = 'incorrect';
 					}
 				} else if ($scope.myQuestions[qIndex].type == 2) {
-     				$scope.myAnswers.answer[qIndex].push((document.getElementById($scope.myQuestions[qIndex].source+"_1").value));
-					$scope.myQuestions[qIndex].answers[1].text != null?
-						$scope.myAnswers.answer[qIndex].push((document.getElementById($scope.myQuestions[qIndex].source+"_2").value)) : null;
+					$scope.myAnswers['answer'].push([]);
+					$scope.myQuestions[qIndex].answers[0].text != null ?
+						$scope.myAnswers.answer[qIndex].push(document.getElementById($scope.myQuestions[qIndex].source+"_1").value) : null;
+					$scope.myQuestions[qIndex].answers[1].text != null ?
+						$scope.myAnswers.answer[qIndex].push(document.getElementById($scope.myQuestions[qIndex].source+"_2").value) : null;
 					$scope.myQuestions[qIndex].answers[2].text !=null ?
-						$scope.myAnswers.answer[qIndex].push((document.getElementById($scope.myQuestions[qIndex].source+"_3").value)):null;
+						$scope.myAnswers.answer[qIndex].push(document.getElementById($scope.myQuestions[qIndex].source+"_3").value):null;
 					$scope.myQuestions[qIndex].answers[3].text != null ?
-						$scope.myAnswers.answer[qIndex].push((document.getElementById($scope.myQuestions[qIndex].source+"_4").value)):null
+						$scope.myAnswers.answer[qIndex].push(document.getElementById($scope.myQuestions[qIndex].source+"_4").value):null;
+					if ($scope.myAnswers.answer[qIndex].length<1){
+						alert('No answer obtained.');
+					}
 					if ($scope.myQuestions[qIndex].answers[0].text != $scope.myAnswers.answer[qIndex][0] ||
 						$scope.myQuestions[qIndex].answers[1].text != $scope.myAnswers.answer[qIndex][1] ||
 						$scope.myQuestions[qIndex].answers[2].text != $scope.myAnswers.answer[qIndex][2] ||

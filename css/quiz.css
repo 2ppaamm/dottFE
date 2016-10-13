@@ -4,7 +4,7 @@ body { background-color: #fff; width:100%;}
 
 
 #mathQuiz {
-   font-family: 'Roboto', sans-serif; font-size: 16px; font-weight: 400; min-height: 1000px; 
+   font-family: 'Roboto', sans-serif; font-size: 16px; font-weight: 400; height: 1500px; 
    position: relative;	overflow: hidden;;	color: #000;background-size:100%;
 	/*background:#fff url(/background_logo.png) no-repeat 0px 0px;*/
 }
