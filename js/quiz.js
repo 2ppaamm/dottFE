@@ -134,14 +134,17 @@
 					}
 				} else if ($scope.myQuestions[qIndex].type == 2) {
 					$scope.myAnswers['answer'].push([]);
-					$scope.myQuestions[qIndex].answers[0].text != null ?
-						$scope.myAnswers.answer[qIndex].push(document.getElementById($scope.myQuestions[qIndex].source+"_1").value) : null;
-					$scope.myQuestions[qIndex].answers[1].text != null ?
-						$scope.myAnswers.answer[qIndex].push(document.getElementById($scope.myQuestions[qIndex].source+"_2").value) : null;
-					$scope.myQuestions[qIndex].answers[2].text !=null ?
-						$scope.myAnswers.answer[qIndex].push(document.getElementById($scope.myQuestions[qIndex].source+"_3").value):null;
-					$scope.myQuestions[qIndex].answers[3].text != null ?
-						$scope.myAnswers.answer[qIndex].push(document.getElementById($scope.myQuestions[qIndex].source+"_4").value):null;
+					var answer1 = document.getElementById($scope.myQuestions[qIndex].source+"_1");
+					if (answer1.length > 0) {
+						$scope.myQuestions[qIndex].answers[0].text != null ?
+							$scope.myAnswers.answer[qIndex].push(document.getElementById($scope.myQuestions[qIndex].source+"_1").value) : null;
+						$scope.myQuestions[qIndex].answers[1].text != null ?
+							$scope.myAnswers.answer[qIndex].push(document.getElementById($scope.myQuestions[qIndex].source+"_2").value) : null;
+						$scope.myQuestions[qIndex].answers[2].text !=null ?
+							$scope.myAnswers.answer[qIndex].push(document.getElementById($scope.myQuestions[qIndex].source+"_3").value):null;
+						$scope.myQuestions[qIndex].answers[3].text != null ?
+							$scope.myAnswers.answer[qIndex].push(document.getElementById($scope.myQuestions[qIndex].source+"_4").value):null;
+					}
 					if ($scope.myAnswers.answer[qIndex].length<1){
 						alert('No answer obtained.');
 					}
