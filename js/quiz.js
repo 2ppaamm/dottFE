@@ -146,7 +146,7 @@
 							$scope.myAnswers.answer[qIndex].push(document.getElementById($scope.myQuestions[qIndex].source+"_4").value):null;
 					}
 					if ($scope.myAnswers.answer[qIndex].length<1){
-						alert('No answer obtained.');
+						alert('ID not obtained. Capture screen and report to admin.');
 					}
 					if ($scope.myQuestions[qIndex].answers[0].text != $scope.myAnswers.answer[qIndex][0] ||
 						$scope.myQuestions[qIndex].answers[1].text != $scope.myAnswers.answer[qIndex][1] ||
