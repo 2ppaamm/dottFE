@@ -65,7 +65,7 @@
 					$scope.activeQuestion = 0;		
 			    }
 			},function(err){
-				alert("Error in retrieving questions.");		
+				alert("Error in retrieving questions, or your login timed out. Login again.");		
 			});
 		}
 
