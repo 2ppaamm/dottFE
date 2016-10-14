@@ -135,7 +135,7 @@
 				} else if ($scope.myQuestions[qIndex].type == 2) {
 					$scope.myAnswers['answer'].push([]);
 					var answer1 = document.getElementById($scope.myQuestions[qIndex].source+"_1");
-					if (answer1.length > 0) {
+					if (answer1) {
 						$scope.myQuestions[qIndex].answers[0].text != null ?
 							$scope.myAnswers.answer[qIndex].push(document.getElementById($scope.myQuestions[qIndex].source+"_1").value) : null;
 						$scope.myQuestions[qIndex].answers[1].text != null ?
@@ -144,8 +144,7 @@
 							$scope.myAnswers.answer[qIndex].push(document.getElementById($scope.myQuestions[qIndex].source+"_3").value):null;
 						$scope.myQuestions[qIndex].answers[3].text != null ?
 							$scope.myAnswers.answer[qIndex].push(document.getElementById($scope.myQuestions[qIndex].source+"_4").value):null;
-					}
-					if ($scope.myAnswers.answer[qIndex].length<1){
+					} else {
 						alert('ID not obtained. Capture screen and report to admin.');
 					}
 					if ($scope.myQuestions[qIndex].answers[0].text != $scope.myAnswers.answer[qIndex][0] ||
