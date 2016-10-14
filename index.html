@@ -42,7 +42,7 @@
 			</div>
 			<div class="question 
 				{{ $index === activeQuestion ? 'active':'inactive'}} {{ myQuestion.questionState === 'answered' ? 'answered':'unanswered'}}" ng-repeat="myQuestion in myQuestions" ng-show="questionshowing($index)" >
-				<div katex bind="myQuestion.question" auto-render class="txt" ></div>
+				<div katex bind="myQuestion.question" auto-render class="txt" id="question_{{myQuestion.id}}"></div>
 				<p><img ng-if="myQuestion.question_image" class="question_image" ng-src="{{baseurl}}{{myQuestion.question_image}}" onContextMenu="return false;"/></p>
 				<div ng-show="myQuestion.type == 1">
 					<div katex bind="Answer.text" auto-render

@@ -134,19 +134,15 @@
 					}
 				} else if ($scope.myQuestions[qIndex].type == 2) {
 					$scope.myAnswers['answer'].push([]);
-					var answer1 = document.getElementById($scope.myQuestions[qIndex].source+"_1");
-					if (answer1) {
-						$scope.myQuestions[qIndex].answers[0].text != null ?
-							$scope.myAnswers.answer[qIndex].push(document.getElementById($scope.myQuestions[qIndex].source+"_1").value) : null;
-						$scope.myQuestions[qIndex].answers[1].text != null ?
-							$scope.myAnswers.answer[qIndex].push(document.getElementById($scope.myQuestions[qIndex].source+"_2").value) : null;
-						$scope.myQuestions[qIndex].answers[2].text !=null ?
-							$scope.myAnswers.answer[qIndex].push(document.getElementById($scope.myQuestions[qIndex].source+"_3").value):null;
-						$scope.myQuestions[qIndex].answers[3].text != null ?
-							$scope.myAnswers.answer[qIndex].push(document.getElementById($scope.myQuestions[qIndex].source+"_4").value):null;
-					} else {
-						alert('ID not obtained. Capture screen and report to admin.');
-					}
+					$scope.myQuestions[qIndex].answers[0].text != null ?
+						$scope.myAnswers.answer[qIndex].push($('#question_'+$scope.myQuestions[qIndex].id).children("input[type='number']:first").val()) : null;
+					$scope.myQuestions[qIndex].answers[1].text != null ?
+						$scope.myAnswers.answer[qIndex].push($('#question_'+$scope.myQuestions[qIndex].id).children("input[type='number']:nth-child(2)").val()):null;
+					$scope.myQuestions[qIndex].answers[2].text !=null ?
+						$scope.myAnswers.answer[qIndex].push($('#question_'+$scope.myQuestions[qIndex].id).children("input[type='number']:nth-child(3)").val()):null;
+					$scope.myQuestions[qIndex].answers[3].text != null ?
+						$scope.myAnswers.answer[qIndex].push($('#question_'+$scope.myQuestions[qIndex].id).children("input[type='number']:nth-child(4)").val()):null;
+
 					if ($scope.myQuestions[qIndex].answers[0].text != $scope.myAnswers.answer[qIndex][0] ||
 						$scope.myQuestions[qIndex].answers[1].text != $scope.myAnswers.answer[qIndex][1] ||
 						$scope.myQuestions[qIndex].answers[2].text != $scope.myAnswers.answer[qIndex][2] ||
