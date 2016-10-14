@@ -28,7 +28,7 @@
 	<span us-spinner="{radius:30, width:8, length: 16}"></span>
 		<div id="mathQuiz" ng-controller="QuizController">
 			<div ng-show="scratchpad" class="my-drawing visibilityhide" id="scratchpadshow"></div>				
-			<div class="header"><h1>All Gifted<span>Mathematics</span></h1>
+			<div class="header"><h1>All Gifted<span ng-if="activeQuestion === -1">Mathematics</span></h1>
 				<div class="progress visibilityhide" id="progressshow">
 					<div class="
 					{{($index === activeQuestion) ? 'on':'off'}}

@@ -14,8 +14,8 @@ body { background-color: #fff; width:100%; }
 
 #mathQuiz .header{ z-index:999;}
 #mathQuiz .literally { width:100%; height: 1500px; bottom:0; background: white url(/paper.jpg) no-repeat;background-size:100% 100%;}
-#mathQuiz .lc-clear {position:fixed !important; top:0 !important; left:0px;}
-#mathQuiz .literally .lc-picker { top:20px;border-right: none; background-color: rgba(0,0,0,0.05); width:30px;}
+#mathQuiz .lc-clear {position:fixed !important; top:0px !important; left:0px; background-color: #960000;color:white;}
+#mathQuiz .literally .lc-picker { top:25px;border-right: none; background-color: rgba(0,0,0,0.05); width:30px; position:fixed;}
 #mathQuiz .literally .color-well { width:30px; }
 #mathQuiz .literally .lc-picker .toolbar-button.selected:not(.disabled){ background-color: rgba(150,0,0,0.2); }
 #mathQuiz .literally.toolbar-at-top .lc-options {bottom:0; top:auto; border-bottom:none; position:fixed;background-color: rgba(0,0,0,0.05);}
@@ -23,7 +23,7 @@ body { background-color: #fff; width:100%; }
 
 #mathQuiz h1 {
 	font-weight: 100; font-size: 1.2em; text-transform: uppercase; margin: 0px;
-	position: absolute; top: 50px; left: 40px; color:#960000;
+	position: absolute; top: 50px; left: 45px; color:#960000;
 }
 
 #mathQuiz h1 span {
@@ -58,7 +58,7 @@ body { background-color: #fff; width:100%; }
 }
 
 /* Progress Bar */
-#mathQuiz .progress {width: 550px; position: absolute;top:150px; left: 40px}
+#mathQuiz .progress {width: 550px; position: absolute;top:150px; left: 45px;}
 #mathQuiz .progress div {
 	position: relative;	display: inline-block; width: 30px; height: 30px; margin-right: 30px;
 	border-radius: 50%;	background-color: rgba(0, 0, 0, .2); transition: background-color 1s;
@@ -76,7 +76,7 @@ body { background-color: #fff; width:100%; }
 #mathQuiz .progress div.correct::after { top:-5px; opacity: 1}
 
 /* Intro */
-#mathQuiz .intro { position: absolute; top:180px; left:40px; width: 550px;}
+#mathQuiz .intro { position: absolute; top:180px; left:45px; width: 550px;}
 #mathQuiz .intro p { margin:0px 0px 40px 0px;}
 #mathQuiz .btn { background-color:#960000; }
 
@@ -151,7 +151,7 @@ body { background-color: #fff; width:100%; }
 /*#mathQuiz .results .inactive{visibility:hidden;}*/
 
 #mathQuiz .active, #mathQuiz .inactive { transition:left 0.5s ease-in-out;}
-#mathQuiz .active { left: 40px; visibility:visible;}
+#mathQuiz .active { left: 45px; visibility:visible;}
 /*#mathQuiz .results .inactive{display:none;}*/
 #mathQuiz .intro.inactive, #mathQuiz.inactive.answered {left:-1350px; }
 #mathQuiz .footer { position:fixed; bottom: 0; right:0;color:#666; font-size: 0.7em;z-index:1000;}
@@ -177,12 +177,12 @@ body { background-color: #fff; width:100%; }
 @media screen and (max-width: 650px){
 	body {padding: 0px; margin: 0px;}
 	#mathQuiz {width:100%; background-size: 100%; }
-	#mathQuiz h1 { width:300px;  font-size: 1em; top: 40px; left:40px;}
+	#mathQuiz h1 { width:300px;  font-size: 1em; top: 40px; left:45px;}
 	#mathQuiz h1 span { line-height: 43px;	}
 	#mathQuiz h2 {margin: 0px;}
 	#mathQuiz h3 { font-size: 2.2em; margin-bottom: 15px;}
 
-	#mathQuiz .progress {width: 300px; top: 110px; left: 40px;}
+	#mathQuiz .progress {width: 300px; top: 110px; left: 45px;}
 	#mathQuiz .progress div { width: 25px; height: 25px; margin-right: 20px;}
 	#mathQuiz .progress div::after {width: 53px; height: :33px;}
 
@@ -198,6 +198,6 @@ body { background-color: #fff; width:100%; }
 	#mathQuiz .results {width: 260px; top: 150px; left: 330px;}
 	#mathQuiz .results .share {margin-top: 20px;}
 	#mathQuiz .results a.btn {margin-bottom: 20px;}
-	#mathQuiz .active {left: 40px; width:80%;}
+	#mathQuiz .active {left: 45px; width:80%;}
 	#mathQuiz .intro.inactive, #mathQuiz .inactive.answered {left: :-650px;}
 }
