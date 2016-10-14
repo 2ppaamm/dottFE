@@ -1,14 +1,11 @@
 @import url(http://fonts.googleapis.com/css?family=Titillium+Web:900|Roboto:400,100);
 
-body { background-color: #fff; width:100%; }
+body { background-color: #fff; width:100%;}
 
-.visibilityhide{
-	visibility:hidden;
-}
 
 #mathQuiz {
-	font-family: 'Roboto', sans-serif; font-size: 16px; font-weight: 400; height: 1500px; 
-	position: relative;	overflow: hidden;;	color: #000;background-size:100%;
+   font-family: 'Roboto', sans-serif; font-size: 16px; font-weight: 400; height: 1500px; 
+   position: relative;	overflow: hidden;;	color: #000;background-size:100%;
 	/*background:#fff url(/background_logo.png) no-repeat 0px 0px;*/
 }
 
@@ -81,7 +78,7 @@ body { background-color: #fff; width:100%; }
 /* Questions */
 #mathQuiz .question { width: 550px; position: absolute; top:200px; left: 660px; z-index:10;}
 #mathQuiz .question .txt { font-size: 1.4em; margin: 0px 0px 20px 0px; }
-#mathQuiz .question .question_image { position:center; width:100%;}
+#mathQuiz .question .question_image { position:center; width:80%;}
 #mathQuiz .question .inactive{display:none;}
 
 #mathQuiz .question .lineinput { 
@@ -151,11 +148,11 @@ body { background-color: #fff; width:100%; }
 #mathQuiz .active { left: 72px; visibility:visible;}
 /*#mathQuiz .results .inactive{display:none;}*/
 #mathQuiz .intro.inactive, #mathQuiz.inactive.answered {left:-1350px; }
-#mathQuiz .footer { position:fixed; bottom: 0; right:0;color:#666; font-size: 0.7em;z-index:1000;}
+#mathQuiz .footer { position:fixed; bottom: 0; right:0;color:#666; font-size: 0.7em;}
 #mathQuiz .footer span {font-size: 2.3em; color:black;}
 
 #mathQuiz #scientificCalc11 {position:fixed;bottom:2.3em; right:0px; background-color:#ddd;font-size: 13px;	margin: 0; color: #555;
-	font-weight:bold; font-family: 'Roboto', sans-serif;z-index:1001;}
+	font-weight:bold; font-family: 'Roboto', sans-serif; z-index:1001;}
 #mathQuiz #scientificCalc11 input{ font-size:13px; font-weight:bold; padding:5px; margin:5px;}	
 #mathQuiz #scientificCalc11  cell{ width:20%;	font-weight:bold}
 #mathQuiz #scientificCalc11  #results{ width:250px;background-color:#CCC; height:1.5em; margin:5px;	padding:3px;}
@@ -195,12 +192,6 @@ body { background-color: #fff; width:100%; }
 	#mathQuiz .results {width: 260px; top: 150px; left: 330px;}
 	#mathQuiz .results .share {margin-top: 20px;}
 	#mathQuiz .results a.btn {margin-bottom: 20px;}
-
-/*	#mathQuiz #c1{
-	    height:100%; width:100%; border: 1px solid black;background-color:black;
-	    opacity: 0.2; z-index:20;top:-50px;
-	}
-*/
 	#mathQuiz .active {left: 70px; width:85%;}
 	#mathQuiz .intro.inactive, #mathQuiz .inactive.answered {left: :-650px;}
 }

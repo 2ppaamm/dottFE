@@ -27,13 +27,21 @@
 			        $scope.activeQuestion = 0;
 			        $scope.myQuestions = [];	
 		    	} else if (response.data.code == 203) {
+<<<<<<< HEAD
 					$scope.enrolled = false;
+=======
+		    		$scope.enrolled = false;
+>>>>>>> 58fac96ab9305116ddfae556758b9f8135b8f371
 					$scope.sendMastercode = function(){
 						if($scope.mastercode.mastercode == undefined){
 							alert("Please insert mastercode");
 						}
+<<<<<<< HEAD
 						else
 						{
+=======
+						else {				
+>>>>>>> 58fac96ab9305116ddfae556758b9f8135b8f371
 							getQuestions($scope.baseurl+'/test/mastercode',$scope.mastercode);	
 						}	
 			    	}
@@ -45,8 +53,7 @@
 			    		alert("No questions found");
 						$scope.quests='0';
 			    	}
-					else
-					{
+					else {
 						for(var i=0; i<questions.length; i++){
 							$scope.myQuestions.push({
 								"id": questions[i].id,
@@ -63,10 +70,17 @@
 						}
 					}						
 					$scope.totalQuestions = $scope.myQuestions.length;
+<<<<<<< HEAD
 					$scope.activeQuestion = 0;
 			    }
 			},function(err){
 				alert("Error in retrieving question, or your login timed out. Login again.")
+=======
+					$scope.activeQuestion = 0;		
+			    }
+			},function(err){
+				alert("Error in retrieving questions, or your login timed out. Login again.");		
+>>>>>>> 58fac96ab9305116ddfae556758b9f8135b8f371
 			});
 		}
 
@@ -114,12 +128,20 @@
 			auth.signout();
 		};
 		
+<<<<<<< HEAD
 		$scope.selectAnswer = function(qIndex, aIndex){	
+=======
+		$scope.selectAnswer = function(qIndex, aIndex){
+>>>>>>> 58fac96ab9305116ddfae556758b9f8135b8f371
 			var questionState = $scope.myQuestions[qIndex].questionState;
 			// check if answered
 			if (questionState != 'answered'){
 				$scope.myAnswers['question_id'].push($scope.myQuestions[qIndex].id);
+<<<<<<< HEAD
 				//$scope.myAnswers['answer'].push([]);
+=======
+//				$scope.myAnswers['answer'].push([]);
+>>>>>>> 58fac96ab9305116ddfae556758b9f8135b8f371
 				if ($scope.myQuestions[qIndex].type == 1) {
 					$scope.myQuestions[qIndex].selectedAnswer=aIndex;
 					var correctAnswer = $scope.myQuestions[qIndex].correct;
@@ -168,7 +190,11 @@
 		$scope.selectContinue = function(qIndex){
 			$scope.myQuestions[qIndex].crts="abc";
 			if ($scope.totalQuestions == $scope.activeQuestion+1){
+<<<<<<< HEAD
 				getQuestions($scope.baseurl+'/qa/answers',$scope.myAnswers);
+=======
+				getQuestions($scope.baseurl+'/qa/answer',$scope.myAnswers);
+>>>>>>> 58fac96ab9305116ddfae556758b9f8135b8f371
 			} else
 			
 			return $scope.activeQuestion += 1;
@@ -177,13 +203,21 @@
 		$scope.questionshowing = function(qIndex){
 			return qIndex == $scope.activeQuestion ? true : false;
 		}
+<<<<<<< HEAD
 		
+=======
+
+>>>>>>> 58fac96ab9305116ddfae556758b9f8135b8f371
 		$scope.resulting = $scope.quests == '0' ? true :false;
 		
 		$scope.continuetohide = function(qIndex){
 			return $scope.myQuestions[qIndex].correctness == 'correct' || $scope.myQuestions[qIndex].correctness == 'incorrect' ? true : false;
 		}
+<<<<<<< HEAD
 		
+=======
+
+>>>>>>> 58fac96ab9305116ddfae556758b9f8135b8f371
 		$scope.createShareLinks = function(percentage){
 			var url='http://www.all-gifted.com';
 			//var emailLink = '<a class="btn email" href = "mailto:ace.allgifted@gmail.com" ng-click="logout()">Email parent</a>';

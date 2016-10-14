@@ -27,9 +27,9 @@
 	<body>
 	<span us-spinner="{radius:30, width:8, length: 16}"></span>
 		<div id="mathQuiz" ng-controller="QuizController">
-			<div ng-show="scratchpad" class="my-drawing visibilityhide" id="scratchpadshow"></div>				
+			<div ng-show="scratchpad" class="my-drawing"></div>				
 			<div class="header"><h1>All Gifted<span>Mathematics</span></h1>
-				<div class="progress visibilityhide" id="progressshow">
+				<div class="progress">
 					<div class="
 					{{($index === activeQuestion) ? 'on':'off'}}
 					{{ (myQuestion.questionState === 'answered') ? 'answered' : 'unanswered'}} 
@@ -43,7 +43,7 @@
  					<p>Click to start Adaptive Kindergarten to Primary Six Math course</p>
  					<div ng-click="login()" class="startbtn">START <i class="fa fa-chevron-right"></i></div>
 				</div>
-				<div ng-if="!enrolled" class="visibilityhide" id="mastercodeunenroll">
+				<div ng-if="!enrolled">
 					<h3>Mastercode Registration Needed<br> <input type="number" class="mastercode" ng-model="mastercode.mastercode" placeholder="Mastercode"></h3>
 					<p><input type="text" ng-model = "mastercode.firstname" placeholder="First Name" class="mastercode" required>
 					<input type="text" ng-model = "mastercode.lastname" placeholder="Last Name" class="mastercode" required>
@@ -52,7 +52,7 @@
 				</div>
 			</div>
 			<div class="question 
-				{{ $index === activeQuestion ? 'active':'inactive'}} {{ myQuestion.questionState === 'answered' ? 'answered':'unanswered'}} visibilityhide" ng-repeat="myQuestion in myQuestions" ng-show="questionshowing($index)" id="mathquestionshow">
+				{{ $index === activeQuestion ? 'active':'inactive'}} {{ myQuestion.questionState === 'answered' ? 'answered':'unanswered'}}" ng-repeat="myQuestion in myQuestions" ng-show="questionshowing($index)" >
 				<div katex bind="myQuestion.question" auto-render class="txt" id="question_{{myQuestion.id}}"></div>
 				<p><img ng-if="myQuestion.question_image" class="question_image" ng-src="{{baseurl}}{{myQuestion.question_image}}" onContextMenu="return false;"/></p>
 				<div ng-show="myQuestion.type == 1">
@@ -65,10 +65,10 @@
 							selected: isSelected($parent.$index, $index),
 							correct: isCorrect($parent.$index, $index)
 						}" 
-						ng-click="selectAnswer($parent.$index, $index)"
+						ng-click="selectAnswer($parent.$index, $index)" 
 						class="ans"></div>						
 				</div>
-				<div ng-show="myQuestion.type == 2" ng-if="myQuestion.questionState != 'answered'">
+				<div ng-show="myQuestion.type == 2"  ng-if="myQuestion.questionState != 'answered'">
 					<p ng-click="selectAnswer($index,0)" class="keybtn">Submit</p>
 				</div>
 				<div class="feedback">
@@ -86,7 +86,7 @@
 				<div><a ng-click="logout()" class="btn end" href="#">End Test</a></div>
 			</div>
 			<!-- codes for the calculator -->
-			<div id="scientificCalc11" ng-show="calculator" class="visibilityhide" > 
+			<div id="scientificCalc11" ng-show="calculator"> 
 				<div id="errmsg" ></div>
 				<div id="results"></div>  
 				<table style="width:250px;">
