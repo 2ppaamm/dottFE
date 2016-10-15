@@ -2,10 +2,6 @@
 
 body { background-color: #fff; width:100%; }
 
-.visibilityhide{
-	visibility:hidden;
-}
-
 #mathQuiz {
 	font-family: 'Roboto', sans-serif; font-size: 16px; font-weight: 400; height: 1500px; 
 	position: relative;	overflow: hidden;;	color: #000;background-size:100%;
@@ -84,7 +80,7 @@ body { background-color: #fff; width:100%; }
 /* Questions */
 #mathQuiz .question { width: 550px; position: absolute; top:200px; left: 660px; z-index:10;}
 #mathQuiz .question .txt { font-size: 1.4em; margin: 0px 0px 20px 0px; }
-#mathQuiz .question .question_image { position:center; width:100%;}
+#mathQuiz .question .question_image { position:center; width:90%;}
 #mathQuiz .question .inactive{display:none;}
 
 #mathQuiz .question .lineinput { 
