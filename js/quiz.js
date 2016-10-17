@@ -138,11 +138,11 @@
 					$scope.myQuestions[qIndex].answers[0].text != null ?
 						$scope.myAnswers.answer[qIndex].push($('#question_'+$scope.myQuestions[qIndex].id).children("input[type='number']:first").val()) : null;
 					$scope.myQuestions[qIndex].answers[1].text != null ?
-						$scope.myAnswers.answer[qIndex].push($('#question_'+$scope.myQuestions[qIndex].id).children("input[type='number']:nth-child(2)").val()):null;
+						$scope.myAnswers.answer[qIndex].push($('#question_'+$scope.myQuestions[qIndex].id).children("input[type='number']:eq(1)").val()):null;
 					$scope.myQuestions[qIndex].answers[2].text !=null ?
-						$scope.myAnswers.answer[qIndex].push($('#question_'+$scope.myQuestions[qIndex].id).children("input[type='number']:nth-child(3)").val()):null;
+						$scope.myAnswers.answer[qIndex].push($('#question_'+$scope.myQuestions[qIndex].id).children("input[type='number']:eq(2)").val()):null;
 					$scope.myQuestions[qIndex].answers[3].text != null ?
-						$scope.myAnswers.answer[qIndex].push($('#question_'+$scope.myQuestions[qIndex].id).children("input[type='number']:nth-child(4)").val()):null;
+						$scope.myAnswers.answer[qIndex].push($('#question_'+$scope.myQuestions[qIndex].id).children("input[type='number']:eq(3)").val()):null;
 
 					if ($scope.myQuestions[qIndex].answers[0].text != $scope.myAnswers.answer[qIndex][0] ||
 						$scope.myQuestions[qIndex].answers[1].text != $scope.myAnswers.answer[qIndex][1] ||
