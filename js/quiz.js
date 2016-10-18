@@ -135,19 +135,15 @@
 					}
 				} else if ($scope.myQuestions[qIndex].type == 2) {
 					$scope.myAnswers['answer'].push([]);
-					$scope.myQuestions[qIndex].answers[0].text != null ?
-						$scope.myAnswers.answer[qIndex].push($('#question_'+$scope.myQuestions[qIndex].id).children("input[type='number']:first").val()) : null;
-					$scope.myQuestions[qIndex].answers[1].text != null ?
-						$scope.myAnswers.answer[qIndex].push($('#question_'+$scope.myQuestions[qIndex].id).children("input[type='number']:eq(1)").val()):null;
-					$scope.myQuestions[qIndex].answers[2].text !=null ?
-						$scope.myAnswers.answer[qIndex].push($('#question_'+$scope.myQuestions[qIndex].id).children("input[type='number']:eq(2)").val()):null;
-					$scope.myQuestions[qIndex].answers[3].text != null ?
-						$scope.myAnswers.answer[qIndex].push($('#question_'+$scope.myQuestions[qIndex].id).children("input[type='number']:eq(3)").val()):null;
-
-					if ($scope.myQuestions[qIndex].answers[0].text != $scope.myAnswers.answer[qIndex][0] ||
-						$scope.myQuestions[qIndex].answers[1].text != $scope.myAnswers.answer[qIndex][1] ||
-						$scope.myQuestions[qIndex].answers[2].text != $scope.myAnswers.answer[qIndex][2] ||
-						$scope.myQuestions[qIndex].answers[3].text != $scope.myAnswers.answer[qIndex][3]) {
+					
+					$scope.myAnswers.answer[qIndex].push($scope.myQuestions[qIndex].answers[0].text != null ? $('#question_'+$scope.myQuestions[qIndex].id).children("input[type='number']:first").val() : null);
+					$scope.myAnswers.answer[qIndex].push($scope.myQuestions[qIndex].answers[1].text != null ? $('#question_'+$scope.myQuestions[qIndex].id).children("input[type='number']:eq(1)").val() : null);
+					$scope.myAnswers.answer[qIndex].push($scope.myQuestions[qIndex].answers[2].text != null ? $('#question_'+$scope.myQuestions[qIndex].id).children("input[type='number']:eq(2)").val() : null);
+					$scope.myAnswers.answer[qIndex].push($scope.myQuestions[qIndex].answers[3].text != null ? $('#question_'+$scope.myQuestions[qIndex].id).children("input[type='number']:eq(3)").val() : null);
+					if (Number($scope.myQuestions[qIndex].answers[0].text) != Number($scope.myAnswers.answer[qIndex][0]) ||
+						Number($scope.myQuestions[qIndex].answers[1].text) != Number($scope.myAnswers.answer[qIndex][1]) ||
+						Number($scope.myQuestions[qIndex].answers[2].text) != Number($scope.myAnswers.answer[qIndex][2]) ||
+						Number($scope.myQuestions[qIndex].answers[3].text) != Number($scope.myAnswers.answer[qIndex][3])){
 						$scope.myQuestions[qIndex].correctness = 'incorrect';
 					} else {
 						$scope.myQuestions[qIndex].correctness = 'correct';
