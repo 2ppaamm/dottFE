@@ -28,7 +28,7 @@
 		<span us-spinner="{radius:30, width:8, length: 16}"></span>
 		<div id="mathQuiz" ng-controller="QuizController">
 			<div ng-show="scratchpad" class="my-drawing" id="scratchpadshow"></div>				
-			<div class="header"><h1>All Gifted<span ng-if="activeQuestion === -1">Mathematics</span></h1>
+			<div class="header noselect"><h1>All Gifted<span ng-if="activeQuestion === -1">Mathematics</span></h1>
 				<div class="progress visibilityhide" id="progressshow">
 					<div class="
 					{{($index === activeQuestion) ? 'on':'off'}}
@@ -37,7 +37,7 @@
 					ng-repeat="myQuestion in myQuestions"></div>
 				</div>
 			</div>
-			<div class="intro {{ (activeQuestion > -1) ? 'inactive' :'active'}}">
+			<div class="intro noselect {{ (activeQuestion > -1) ? 'inactive' :'active'}}">
 				<div ng-if="enrolled">
 					<h2>Welcome</h2>
  					<p>Click to start Adaptive Kindergarten to Primary Six Math course</p>
@@ -51,7 +51,7 @@
 					<p ng-click="sendMastercode()" class="startbtn">SUBMIT <i class="fa fa-chevron-right"></i></p>
 				</div>
 			</div>
-			<div class="question 
+			<div class="question noselect
 				{{ $index === activeQuestion ? 'active':'inactive'}} {{ myQuestion.questionState === 'answered' ? 'answered':'unanswered'}} visibilityhide" ng-repeat="myQuestion in myQuestions" ng-show="questionshowing($index)" id="mathquestionshow">
 				<div katex bind="myQuestion.question" auto-render class="txt" id="question_{{myQuestion.id}}"></div>
 				<p><img ng-if="myQuestion.question_image" class="question_image" ng-src="{{baseurl}}{{myQuestion.question_image}}" onContextMenu="return false;"/></p>

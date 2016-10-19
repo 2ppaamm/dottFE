@@ -8,6 +8,9 @@ body { background-color: #fff; width:100%; }
 	/*background:#fff url(/background_logo.png) no-repeat 0px 0px;*/
 }
 
+#mathQuiz .noselect { cursor: default; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none;
+    -moz-user-select: none; -ms-user-select: none; user-select: none; }
+
 #mathQuiz .header{ z-index:999;}
 #mathQuiz .literally { width:100%; height: 1500px; bottom:0; background: white url(/paper.jpg) no-repeat;background-size:100% 100%;}
 #mathQuiz .lc-clear {position:fixed !important; top:0px !important; left:0px; background-color: #960000;color:white;}
@@ -78,9 +81,9 @@ body { background-color: #fff; width:100%; }
 
 
 /* Questions */
-#mathQuiz .question { width: 550px; position: absolute; top:160px; left: 660px; z-index:10;}
-#mathQuiz .question .txt { font-size: 1.4em; margin: 0px 0px 20px 0px; }
-#mathQuiz .question .question_image { position:center; width:90%;}
+#mathQuiz .question { width: 550px; position: absolute; top:160px; left: 660px;}
+#mathQuiz .question .txt { font-size: 1.4em; margin: 0px 0px 20px 0px; z-index:40;}
+#mathQuiz .question .question_image { position:center; width:90%; z-index:-1000;}
 #mathQuiz .question .inactive{display:none;}
 
 #mathQuiz .question .lineinput { 
