@@ -2,6 +2,10 @@
 
 body { background-color: #fff; width:100%; }
 
+.visibilityhide{
+	visibility:hidden;
+}
+
 #mathQuiz {
 	font-family: 'Roboto', sans-serif; font-size: 16px; font-weight: 400; height: 1500px; 
 	position: relative;	overflow: hidden;;	color: #000;background-size:100%;
@@ -18,7 +22,7 @@ body { background-color: #fff; width:100%; }
 #mathQuiz .literally .color-well { width:30px; }
 #mathQuiz .literally .lc-picker .toolbar-button.selected:not(.disabled){ background-color: rgba(150,0,0,0.2); }
 #mathQuiz .literally.toolbar-at-top .lc-options {bottom:0; top:auto; border-bottom:none; position:fixed;background-color: rgba(0,0,0,0.05);}
-#mathQuiz .literally .lc-drawing.with-gui {right: 0;top: 0; position: absolute; left: 0; bottom:0;cursor: default;}
+#mathQuiz .literally .lc-drawing.with-gui {right: 0;top: 0; position: absolute; left: 0; bottom:0;cursor: default;z-index:0;}
 
 #mathQuiz h1 {
 	font-weight: 100; font-size: 1.2em; text-transform: uppercase; margin: 0px;

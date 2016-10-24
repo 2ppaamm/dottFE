@@ -2,7 +2,7 @@
 	var	app = angular.module('mathQuiz', ['katex','auth0', 'angular-storage', 'angular-jwt', 'ngRoute','ngLoadingSpinner']);
 	app.controller('QuizController',
 	 ['$scope', '$http', '$sce', 'auth', 'store', 'katexConfig', function($scope, $http, $sce, auth, store, katexConfig){
-		$scope.baseurl = "http://localhost:8000"
+		$scope.baseurl = "http://quizapi.pamelalim.me"
 		$scope.score = 0;
 		$scope.activeQuestion = -1;
 		$scope.activeQuestionAnswered = 0;
@@ -17,8 +17,11 @@
 		
 		// function to get questions
 		getQuestions = function(questionUrl, $answers){
+			console.log(questionUrl);
+			console.log($answers);
 			$scope.myAnswers ={'question_id':[], 'answer':[]};
 		    $http.post(questionUrl,$answers ).then(function(response){
+				console.log(response);
 		    	if (response.data.code == 206) {
 		    		$scope.percentage = response.data.percentage;
 		    		$scope.score = response.data.score;
@@ -83,7 +86,7 @@
 		$scope.login = function(){
 		    // Set popup to true to use popup
 		    if (auth.isAuthenticated){
-				getQuestions($scope.baseurl+'/test/protected','');
+				getQuestions($scope.baseurl+'/qa','');
 				$scope.percentage=0;
 				$scope.quests = '1';
 				$scope.score=0;
@@ -100,7 +103,7 @@
 		    	}, function(profile, token){
 			        store.set('profile', profile);
 			        store.set('token', token);
-			        getQuestions($scope.baseurl+'/test/protected','');
+			        getQuestions($scope.baseurl+'/qa','');
 			    }, function(err){
 			    	alert('unable to signin');
 		    	})
@@ -144,6 +147,7 @@
 						Number($scope.myQuestions[qIndex].answers[1].text) != Number($scope.myAnswers.answer[qIndex][1]) ||
 						Number($scope.myQuestions[qIndex].answers[2].text) != Number($scope.myAnswers.answer[qIndex][2]) ||
 						Number($scope.myQuestions[qIndex].answers[3].text) != Number($scope.myAnswers.answer[qIndex][3])){
+							
 						$scope.myQuestions[qIndex].correctness = 'incorrect';
 					} else {
 						$scope.myQuestions[qIndex].correctness = 'correct';
@@ -164,7 +168,7 @@
 		$scope.selectContinue = function(qIndex){
 			$scope.myQuestions[qIndex].crts="abc";
 			if ($scope.totalQuestions == $scope.activeQuestion+1){
-				getQuestions($scope.baseurl+'/test/answers',$scope.myAnswers);
+				getQuestions($scope.baseurl+'/qa/answer',$scope.myAnswers);
 			} else
 			
 			return $scope.activeQuestion += 1;
