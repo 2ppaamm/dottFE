@@ -58,6 +58,8 @@ body { background-color: #fff; width:100%; }
 	display: inline-block; cursor: pointer; background-color: green;
 	color: #fff; text-decoration: none;
 	padding: 5px 15px;
+	position:absolute;
+	z-index:40;
 }
 
 /* Progress Bar */
