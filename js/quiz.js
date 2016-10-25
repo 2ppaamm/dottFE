@@ -37,7 +37,22 @@
 						}
 						else
 						{
-							getQuestions($scope.baseurl+'/test/mastercode',$scope.mastercode);	
+							if($scope.mastercode.firstname == undefined){
+								alert("Please insert First Name");
+							}
+							else{
+								if($scope.mastercode.lastname == undefined){
+									alert("Please insert Last Name");
+								}
+								else{
+									if($scope.mastercode.date_of_birth == undefined){
+										alert("Please insert Date Of Birth");
+									}
+									else{
+										getQuestions($scope.baseurl+'/test/mastercode',$scope.mastercode);	
+									}
+								}
+							}	
 						}	
 			    	}
 		    	} else {
