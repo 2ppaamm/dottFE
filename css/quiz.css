@@ -17,7 +17,7 @@ body { background-color: #fff; width:100%;}
 
 #mathQuiz h1 {
 	font-weight: 100; font-size: 1.2em; text-transform: uppercase; margin: 0px;
-	position: absolute; top: 50px; left: 72px; color:#960000;
+	position: absolute; top: 50px; left: 45px; color:#960000;
 }
 
 #mathQuiz h1 span {
@@ -52,7 +52,7 @@ body { background-color: #fff; width:100%;}
 }
 
 /* Progress Bar */
-#mathQuiz .progress {width: 550px; position: absolute;top:150px; left: 72px}
+#mathQuiz .progress {width: 550px; position: absolute;top:150px; left: 45px}
 #mathQuiz .progress div {
 	position: relative;	display: inline-block; width: 30px; height: 30px; margin-right: 30px;
 	border-radius: 50%;	background-color: rgba(0, 0, 0, .2); transition: background-color 1s;
@@ -145,7 +145,7 @@ body { background-color: #fff; width:100%;}
 /*#mathQuiz .results .inactive{visibility:hidden;}*/
 
 #mathQuiz .active, #mathQuiz .inactive { transition:left 0.5s ease-in-out;}
-#mathQuiz .active { left: 72px; visibility:visible;}
+#mathQuiz .active { left: 45px; visibility:visible;}
 /*#mathQuiz .results .inactive{display:none;}*/
 #mathQuiz .intro.inactive, #mathQuiz.inactive.answered {left:-1350px; }
 #mathQuiz .footer { position:fixed; bottom: 0; right:0;color:#666; font-size: 0.7em;}
@@ -184,7 +184,7 @@ body { background-color: #fff; width:100%;}
 
 	#mathQuiz .question {width: 300px; top: 160px; left: 330px;}
 	#mathQuiz .question .txt {font-size: 1.2em; margin 0px 0px 20px 0px; background-size:80% 100%;}
-	#mathQuiz .question .question_image { background-repeat:no-repeat; background-position:center; background-size:80% 100%;}
+	#mathQuiz .question .question_image { background-repeat:no-repeat; background-position:center;}
 	#mathQuiz .question .ans {font-size: 1em; padding: 5px 10px; margin-bottom: 10px; width:90%;}
 	#mathQuiz .question .ans.image {max-height: 60px; background-size: auto 45px;}
 	#mathQuiz .question .ans.image:hover {background-color:  #000;}
