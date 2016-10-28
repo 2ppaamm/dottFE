@@ -12,9 +12,10 @@
 		$scope.enrolled = true;
 		$scope.mastercode = {};
 		$scope.myAnswers ={'question_id':[], 'answer':[]};
-		$scope.quests='1';
+		$scope.questsow='1';
 		$scope.scratchpad = false;
 		$scope.calculator = false;
+		$scope.cindex = "";
 		
 		// function to get questions
 		getQuestions = function(questionUrl, $answers){
@@ -24,6 +25,7 @@
 		    $http.post(questionUrl,$answers ).then(function(response){
 				console.log(response);
 		    	if (response.data.code == 206) {
+					$scope.questsow='0';
 		    		$scope.percentage = response.data.percentage;
 		    		$scope.score = response.data.score;
 		    		$scope.maxile = response.data.maxile;
@@ -63,7 +65,7 @@
 			    	var questions = response.data.questions;
 			    	if (questions === undefined) {
 			    		alert("No questions found");
-						$scope.quests='0';
+						$scope.questsow='0';
 			    	}
 					else
 					{
@@ -78,8 +80,21 @@
 										  {"id":2, "text":questions[i].answer2, "image":questions[i].answer2_image},
 										  {"id":3, "text":questions[i].answer3, "image":questions[i].answer3_image}],
 								"correct" : questions[i].correct_answer,
-								"type": questions[i].type_id			    					
+								"type": questions[i].type_id,
+								"calculator":questions[i].calculator								
 							});
+						}
+						console.log($scope.myQuestions[0].calculator);
+						if($scope.myQuestions[0].calculator == "s" || $scope.myQuestions[0].calculator == "S"){
+							$scope.cindex = "s";
+						}
+						else{
+							if($scope.myQuestions[0].calculator == null || $scope.myQuestions[0].calculator == undefined){
+								$scope.cindex="x";
+							}
+							else{
+								$scope.cindex="x";
+							}
 						}
 					}						
 					$scope.totalQuestions = $scope.myQuestions.length;
@@ -98,14 +113,25 @@
 		$scope.calculatorSwitch = function(){
 			$scope.calculator = $scope.calculator ? false : true;
 		}
-
+		
+		$scope.calculatorswitches = function(){
+			console.log($scope.cindex);
+			if($scope.cindex == "s"){
+				return true;
+			}
+			else{
+				return false;
+			}
+			
+		}
+		
 		// login and then get the questions from api
 		$scope.login = function(){
 		    // Set popup to true to use popup
 		    if (auth.isAuthenticated){
 				getQuestions($scope.baseurl+'/test/protected','');
 				$scope.percentage=0;
-				$scope.quests = '1';
+				$scope.questsow = '1';
 				$scope.score=0;
 		    }
 		    else {
@@ -184,8 +210,28 @@
 		}
 		$scope.selectContinue = function(qIndex){
 			$scope.myQuestions[qIndex].crts="abc";
+			//console.log($scope.myQuestions[qIndex + 1].calculator);
+			if($scope.myQuestions[qIndex +1] != undefined){
+				if($scope.myQuestions[qIndex + 1].calculator == undefined || $scope.myQuestions[qIndex + 1].calculator == null){
+					$scope.cindex = "x";
+					console.log($scope.cindex);
+				}
+				else{
+					if($scope.myQuestions[qIndex + 1].calculator == "S" || $scope.myQuestions[qIndex + 1].calculator == "s"){
+						$scope.cindex="s";
+						console.log($scope.cindex);
+					}
+					else
+					{
+						$scope.cindex="x";
+						console.log($scope.cindex);
+					}
+				}
+			}
+			
 			if ($scope.totalQuestions == $scope.activeQuestion+1){
 				getQuestions($scope.baseurl+'/test/answers',$scope.myAnswers);
+				
 			} else
 			
 			return $scope.activeQuestion += 1;
@@ -195,7 +241,16 @@
 			return qIndex == $scope.activeQuestion ? true : false;
 		}
 		
-		$scope.resulting = $scope.quests == '0' ? true :false;
+		//$scope.resulting = $scope.quests == '0' ? true :false;
+		$scope.resulting=function(){
+			console.log($scope.questsow);
+			if($scope.questsow='0'){
+				return true;
+			}
+			else{
+				return false;
+			}
+		}
 		
 		$scope.continuetohide = function(qIndex){
 			return $scope.myQuestions[qIndex].correctness == 'correct' || $scope.myQuestions[qIndex].correctness == 'incorrect' ? true : false;
