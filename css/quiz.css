@@ -108,7 +108,7 @@ body { background-color: #fff; width:100%; }
 }
 
 #mathQuiz .question .ans.image {
-	width:225px; min-height:110px; padding: 0px; background-repeat: no-repeat;
+	max-width:100%; min-height:110px; padding: 0px; background-repeat: no-repeat;
 	background-position: 0px 0px; background-size:auto 70px;
 }
 
