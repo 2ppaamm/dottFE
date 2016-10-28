@@ -1,9 +1,9 @@
 (function(){
 	var	app = angular.module('mathQuiz', ['katex','auth0', 'angular-storage', 'angular-jwt', 'ngRoute','ngLoadingSpinner']);
 	app.controller('QuizController',
-	 ['$scope', '$http', '$sce', 'auth', 'store', 'katexConfig', function($scope, $http, $sce, auth, store, katexConfig){
-//		$scope.baseurl = "http://quizapi.pamelalim.me"
-		$scope.baseurl = "http://localhost:8000"
+	 ['$scope', '$http', '$sce', 'auth', 'store', 'katexConfig','$window', function($scope, $http, $sce, auth, store, katexConfig,$window){
+		$scope.baseurl = "http://quizapi.pamelalim.me"
+//		$scope.baseurl = "http://localhost:8000"
 		$scope.score = 0;
 		$scope.activeQuestion = -1;
 		$scope.activeQuestionAnswered = 0;
@@ -158,6 +158,7 @@
 			store.remove('profile');
 			store.remove('token');
 			auth.signout();
+			$window.location.href="http://quiz.pamelalim.me";
 		};
 		
 		$scope.selectAnswer = function(qIndex, aIndex){	
@@ -181,7 +182,6 @@
 					}
 				} else if ($scope.myQuestions[qIndex].type == 2) {
 					$scope.myAnswers['answer'].push([]);
-					
 					$scope.myAnswers.answer[qIndex].push($scope.myQuestions[qIndex].answers[0].text != null ? $('#question_'+$scope.myQuestions[qIndex].id).children("input[type='number']:first").val() : null);
 					$scope.myAnswers.answer[qIndex].push($scope.myQuestions[qIndex].answers[1].text != null ? $('#question_'+$scope.myQuestions[qIndex].id).children("input[type='number']:eq(1)").val() : null);
 					$scope.myAnswers.answer[qIndex].push($scope.myQuestions[qIndex].answers[2].text != null ? $('#question_'+$scope.myQuestions[qIndex].id).children("input[type='number']:eq(2)").val() : null);
