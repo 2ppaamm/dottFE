@@ -151,8 +151,8 @@ body { background-color: #fff; width:100%; }
 
 #mathQuiz .results .share a.btn.email { background-color: #f0a121;}
 #mathQuiz .results .share a.btn.twitter { background-color: #59adeb;}
-#mathQuiz .results .share a.btn.domore { background-color: #f0a121;}
-#mathQuiz .results a.btn.end { background-color: #960000; }
+#mathQuiz .results .share a.btn.domore { background-color: #f0a121; position:relative; z-index:40}
+#mathQuiz .results a.btn.end { background-color: #960000; position:relative; z-index:40}
 /*#mathQuiz .results .inactive{visibility:hidden;}*/
 
 #mathQuiz .active, #mathQuiz .inactive { transition:left 0.5s ease-in-out;}

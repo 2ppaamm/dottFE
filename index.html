@@ -71,7 +71,7 @@
 			<div class="results  {{(totalQuestions === activeQuestion) ? 'active' : 'inactive'}} visibilityhide" id="resultshow" ng-show="resulting()">
 				<h3>Results</h3>
 				<p>You scored {{percentage | number:2}}% for the latest test<span ng-if="maxile > 0">, and now your maxile level is {{maxile}}</span>.</p>
-				<p>Use the links below to report your achievement.</p>
+				<p>What do you want to do next?</p>
 				<div class="share" ng-bind-html = "createShareLinks(percentage)" compile-template></div>
 				<div><a ng-click="logout()" class="btn end" href="#">End Test</a></div>
 			</div>
