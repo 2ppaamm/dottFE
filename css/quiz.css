@@ -108,13 +108,8 @@ body { background-color: #fff; width:100%; }
 }
 
 #mathQuiz .question .ans.image {
-<<<<<<< HEAD
 	width:225px; min-height:110px; padding: 0px; background-repeat: no-repeat;
 	background-position: 0px 0px; background-size:auto 100%;
-=======
-	max-width:100%; min-height:110px; padding: 0px; background-repeat: no-repeat;
-	background-position: 0px 0px; background-size:auto 70px;
->>>>>>> 1b0517d8885439bc7b44354b88d6d04c41012f7b
 }
 
 #mathQuiz .question .ans.selected { border-color: #be4616 }
