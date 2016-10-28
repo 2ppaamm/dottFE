@@ -2,7 +2,8 @@
 	var	app = angular.module('mathQuiz', ['katex','auth0', 'angular-storage', 'angular-jwt', 'ngRoute','ngLoadingSpinner']);
 	app.controller('QuizController',
 	 ['$scope', '$http', '$sce', 'auth', 'store', 'katexConfig', function($scope, $http, $sce, auth, store, katexConfig){
-		$scope.baseurl = "http://quizapi.pamelalim.me"
+//		$scope.baseurl = "http://quizapi.pamelalim.me"
+		$scope.baseurl = "http://localhost:8000"
 		$scope.score = 0;
 		$scope.activeQuestion = -1;
 		$scope.activeQuestionAnswered = 0;
@@ -54,7 +55,8 @@
 										getQuestions($scope.baseurl+'/test/mastercode',$scope.mastercode);	
 									}
 								}
-							}
+
+							}	
 						}	
 			    	}
 		    	} else {
@@ -79,7 +81,7 @@
 										  {"id":3, "text":questions[i].answer3, "image":questions[i].answer3_image}],
 								"correct" : questions[i].correct_answer,
 								"type": questions[i].type_id,
-								"calculator":questions[i].calculator
+								"calculator":questions[i].calculator								
 							});
 						}
 						console.log($scope.myQuestions[0].calculator);
@@ -179,16 +181,15 @@
 					}
 				} else if ($scope.myQuestions[qIndex].type == 2) {
 					$scope.myAnswers['answer'].push([]);
+					$scope.myAnswers.answer[qIndex].push($scope.myQuestions[qIndex].answers[0].text != null ? $('#question_'+$scope.myQuestions[qIndex].id).children("input[type='number']:first").val() : null);
+					$scope.myAnswers.answer[qIndex].push($scope.myQuestions[qIndex].answers[1].text != null ? $('#question_'+$scope.myQuestions[qIndex].id).children("input[type='number']:eq(1)").val() : null);
+					$scope.myAnswers.answer[qIndex].push($scope.myQuestions[qIndex].answers[2].text != null ? $('#question_'+$scope.myQuestions[qIndex].id).children("input[type='number']:eq(2)").val() : null);
+					$scope.myAnswers.answer[qIndex].push($scope.myQuestions[qIndex].answers[3].text != null ? $('#question_'+$scope.myQuestions[qIndex].id).children("input[type='number']:eq(3)").val() : null);
+					if (Number($scope.myQuestions[qIndex].answers[0].text) != Number($scope.myAnswers.answer[qIndex][0]) ||
+						Number($scope.myQuestions[qIndex].answers[1].text) != Number($scope.myAnswers.answer[qIndex][1]) ||
+						Number($scope.myQuestions[qIndex].answers[2].text) != Number($scope.myAnswers.answer[qIndex][2]) ||
+						Number($scope.myQuestions[qIndex].answers[3].text) != Number($scope.myAnswers.answer[qIndex][3])){
 					
- 					$scope.myAnswers.answer[qIndex].push($scope.myQuestions[qIndex].answers[0].text != null ? $('#question_'+$scope.myQuestions[qIndex].id).children("input[type='number']:first").val() : null);
- 					$scope.myAnswers.answer[qIndex].push($scope.myQuestions[qIndex].answers[1].text != null ? $('#question_'+$scope.myQuestions[qIndex].id).children("input[type='number']:eq(1)").val() : null);
- 					$scope.myAnswers.answer[qIndex].push($scope.myQuestions[qIndex].answers[2].text != null ? $('#question_'+$scope.myQuestions[qIndex].id).children("input[type='number']:eq(2)").val() : null);
- 					$scope.myAnswers.answer[qIndex].push($scope.myQuestions[qIndex].answers[3].text != null ? $('#question_'+$scope.myQuestions[qIndex].id).children("input[type='number']:eq(3)").val() : null);
- 					if (Number($scope.myQuestions[qIndex].answers[0].text) != Number($scope.myAnswers.answer[qIndex][0]) ||
- 						Number($scope.myQuestions[qIndex].answers[1].text) != Number($scope.myAnswers.answer[qIndex][1]) ||
- 						Number($scope.myQuestions[qIndex].answers[2].text) != Number($scope.myAnswers.answer[qIndex][2]) ||
- 						Number($scope.myQuestions[qIndex].answers[3].text) != Number($scope.myAnswers.answer[qIndex][3])){
-
 						$scope.myQuestions[qIndex].correctness = 'incorrect';
 					} else {
 						$scope.myQuestions[qIndex].correctness = 'correct';
