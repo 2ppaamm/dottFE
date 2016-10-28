@@ -50,6 +50,7 @@
 										alert("Please insert Date Of Birth");
 									}
 									else{
+										console.log($scope.mastercode.date_of_birth);
 										getQuestions($scope.baseurl+'/test/mastercode',$scope.mastercode);	
 									}
 								}
@@ -229,7 +230,7 @@
 			return store.get('token');
 		}
 	    jwtOptionsProvider.config({
-	      whiteListedDomains: ['math.all-gifted.com', 'localhost', 'quizapi.pamelalim.me', 'quiz.all-gifted.com', 'devquiz.pamelalim.me']
+	      whiteListedDomains: ['math.all-gifted.com', 'localhost', 'quizapi.pamelalim.me', 'quiz.all-gifted.com', 'devquizapi.pamelalim.me', 'devquiz.pamelalim.me']
 	    });
 		$httpProvider.interceptors.push('jwtInterceptor');
 	});
