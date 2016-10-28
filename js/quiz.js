@@ -52,6 +52,7 @@
 										alert("Please insert Date Of Birth");
 									}
 									else{
+										console.log($scope.mastercode.date_of_birth);
 										getQuestions($scope.baseurl+'/test/mastercode',$scope.mastercode);	
 									}
 								}
@@ -181,6 +182,7 @@
 					}
 				} else if ($scope.myQuestions[qIndex].type == 2) {
 					$scope.myAnswers['answer'].push([]);
+<<<<<<< HEAD
  					$scope.myAnswers.answer[qIndex].push($scope.myQuestions[qIndex].answers[0].text != null ? $('#question_'+$scope.myQuestions[qIndex].id).children("input[type='number']:first").val() : null);
  					$scope.myAnswers.answer[qIndex].push($scope.myQuestions[qIndex].answers[1].text != null ? $('#question_'+$scope.myQuestions[qIndex].id).children("input[type='number']:eq(1)").val() : null);
  					$scope.myAnswers.answer[qIndex].push($scope.myQuestions[qIndex].answers[2].text != null ? $('#question_'+$scope.myQuestions[qIndex].id).children("input[type='number']:eq(2)").val() : null);
@@ -190,6 +192,17 @@
  						Number($scope.myQuestions[qIndex].answers[2].text) != Number($scope.myAnswers.answer[qIndex][2]) ||
  						Number($scope.myQuestions[qIndex].answers[3].text) != Number($scope.myAnswers.answer[qIndex][3])){
 
+=======
+					$scope.myAnswers.answer[qIndex].push($scope.myQuestions[qIndex].answers[0].text != null ? $('#question_'+$scope.myQuestions[qIndex].id).children("input[type='number']:first").val() : null);
+					$scope.myAnswers.answer[qIndex].push($scope.myQuestions[qIndex].answers[1].text != null ? $('#question_'+$scope.myQuestions[qIndex].id).children("input[type='number']:eq(1)").val() : null);
+					$scope.myAnswers.answer[qIndex].push($scope.myQuestions[qIndex].answers[2].text != null ? $('#question_'+$scope.myQuestions[qIndex].id).children("input[type='number']:eq(2)").val() : null);
+					$scope.myAnswers.answer[qIndex].push($scope.myQuestions[qIndex].answers[3].text != null ? $('#question_'+$scope.myQuestions[qIndex].id).children("input[type='number']:eq(3)").val() : null);
+					if (Number($scope.myQuestions[qIndex].answers[0].text) != Number($scope.myAnswers.answer[qIndex][0]) ||
+						Number($scope.myQuestions[qIndex].answers[1].text) != Number($scope.myAnswers.answer[qIndex][1]) ||
+						Number($scope.myQuestions[qIndex].answers[2].text) != Number($scope.myAnswers.answer[qIndex][2]) ||
+						Number($scope.myQuestions[qIndex].answers[3].text) != Number($scope.myAnswers.answer[qIndex][3])){
+							
+>>>>>>> 1b0517d8885439bc7b44354b88d6d04c41012f7b
 						$scope.myQuestions[qIndex].correctness = 'incorrect';
 					} else {
 						$scope.myQuestions[qIndex].correctness = 'correct';
@@ -284,7 +297,7 @@
 			return store.get('token');
 		}
 	    jwtOptionsProvider.config({
-	      whiteListedDomains: ['math.all-gifted.com', 'localhost', 'quizapi.pamelalim.me', 'quiz.all-gifted.com', 'devquiz.pamelalim.me']
+	      whiteListedDomains: ['math.all-gifted.com', 'localhost', 'quizapi.pamelalim.me', 'quiz.all-gifted.com', 'devquizapi.pamelalim.me', 'devquiz.pamelalim.me']
 	    });
 		$httpProvider.interceptors.push('jwtInterceptor');
 	});
