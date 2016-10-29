@@ -37,7 +37,8 @@
 					<h3>Mastercode Registration Needed<br> <input type="number" class="mastercode" ng-model="mastercode.mastercode" placeholder="Mastercode"></h3>
 					<p><input type="text" ng-model = "mastercode.firstname" placeholder="First Name" class="mastercode" required>
 					<input type="text" ng-model = "mastercode.lastname" placeholder="Last Name" class="mastercode" required>
-					<input type="date" ng-model = "mastercode.date_of_birth" placeholder="Birthdate in yyyy-mm-dd" class="mastercode" required></p>
+
+					<input type="datetime" ng-model = "mastercode.date_of_birth" placeholder="Birthdate in mm/dd/yyyy" class="mastercode" required></p>
 					<p ng-click="sendMastercode()" class="startbtn">SUBMIT <i class="fa fa-chevron-right"></i></p>
 				</div>
 			</div>
@@ -71,7 +72,7 @@
 			<div class="results  {{(totalQuestions === activeQuestion) ? 'active' : 'inactive'}} visibilityhide" id="resultshow" ng-show="resulting()">
 				<h3>Results</h3>
 				<p>You scored {{percentage | number:2}}% for the latest test<span ng-if="maxile > 0">, and now your maxile level is {{maxile}}</span>.</p>
-				<p>Use the links below to report your achievement.</p>
+				<p>What do you want to do next?</p>
 				<div class="share" ng-bind-html = "createShareLinks(percentage)" compile-template></div>
 				<div><a ng-click="logout()" class="btn end" href="#">End Test</a></div>
 			</div>
