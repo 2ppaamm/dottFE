@@ -256,7 +256,7 @@ var functions = [ 'sqrt' , 'cos' , 'sin' , 'log10', 'ln'  ,'abs' ,'tan'  ]
 						return ;
 						}						
 					
-					var pushMe = calculate( n2, n1, op);
+				var pushMe = calculate( n2, n1, op);
 					rpnArray.splice(insertAt, 0, pushMe ); 
 					}
 				else
@@ -267,7 +267,7 @@ var functions = [ 'sqrt' , 'cos' , 'sin' , 'log10', 'ln'  ,'abs' ,'tan'  ]
 				{
 						displayError('could_not_parse');
 						console.log('get me outta here, there is something wrong');
-						return;
+					return;
 				}	
 			}
 
@@ -309,7 +309,7 @@ function calculate (a,b,op){
 
 function replaceAllPis(){
 	var data = new String($results.text()) ;
-	if(data.indexOf('pi')  == -1)
+if(data.indexOf('pi')  == -1)
 		return;
 		
 	while( data.indexOf('pi') != -1)
@@ -318,31 +318,31 @@ function replaceAllPis(){
 		var middle = Math.PI;
 		var lastPart =  data.substring( data.indexOf('pi') + 2	)//
 		data = firstPart + middle + lastPart;
-		}
+	}
 	$results.html(data)	
 		 
 	}
 
 	  function  evaluateFuncts(){
-			var finalString='';
+		var finalString='';
 			
 			var bRadians =  $rb.is(":checked");
 			var radDeg =  bRadians? 1 : ( Math.PI/180 );
 			
 			replaceAllPis();
-			
+		
 			 for(var i = 0 ; i < functions.length ; i++)
 				{
 				var data = new String($results.text()) ;
 				var fxn= functions[i];
-				var c =0;
+			var c =0;
 			
 					 
 				var firstRun = true ;	 
 				while(data.indexOf(fxn ) != -1 && c++ < 5)
 						{
 						if(firstRun  )
-							{
+						{
 							p('fxn: ' + fxn + ', data : ' +data);
 							firstRun =false;	
 							}
@@ -351,35 +351,35 @@ function replaceAllPis(){
 						var temp = data.substring(iStart + fxn.length );
 						var iEnd = temp.indexOf( ')' ) +1;
 						var lastPart  = temp.substring(iEnd);;
-					
+				
 						temp = temp.substring( 0 ,iEnd);  // this is ( 60) for something like cos(60)
 						
 					 
 
 						var number =  temp.substring(temp.indexOf('(')+1 ,  temp.indexOf(')' ));
 						
-						if( isNaN( +number))
+					if( isNaN( +number))
 							console.log('problem parsing number = ' +number);
 						number = parseFloat (number);
-						
+					
 						if(fxn == 'sin')
 							{
 							console.log('radDeg * number ' +(radDeg * number));
 							inject = Math.sin(radDeg * number);
 							console.log('Math.sin(radDeg * number)   Math.sin(' + (radDeg * number) +')= ' +inject  );	
 							}
-						else if(fxn == 'cos')
+					else if(fxn == 'cos')
 							inject = Math.cos(radDeg * number);
 						else if(fxn == 'tan')
 							inject = Math.tan(radDeg * number);
 						else if(fxn == 'sqrt')
 							inject = Math.sqrt(number);
-						else if(fxn == 'log10')
+					else if(fxn == 'log10')
 							inject = Math.LOG10E(number);
 						else if(fxn == 'ln')
 							inject = Math.LN10(number);
 						else if(fxn == 'abs')
-							inject = Math.abs(number);
+						inject = Math.abs(number);
 							
 												
 						
@@ -465,4 +465,4 @@ function replaceAllPis(){
 	$("#clear").click(function(){
 		input.val('');
 		})
-	 })
+	 }) 

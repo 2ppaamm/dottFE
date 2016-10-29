@@ -2,59 +2,40 @@
 	var	app = angular.module('mathQuiz', ['katex','auth0', 'angular-storage', 'angular-jwt', 'ngRoute','ngLoadingSpinner']);
 	app.controller('QuizController',
 	 ['$scope', '$http', '$sce', 'auth', 'store', 'katexConfig', function($scope, $http, $sce, auth, store, katexConfig){
-		$scope.baseurl = "http://quizapi.pamelalim.me"
+	 	$scope.baseurl = "http://quizapi.pamelalim.me"
 		$scope.score = 0;
 		$scope.activeQuestion = -1;
 		$scope.activeQuestionAnswered = 0;
 		$scope.percentage = 0;
 		$scope.maxile = 0;
-		$scope.enrolled = true;
+		$scope.enrolled = null;
 		$scope.mastercode = {};
 		$scope.myAnswers ={'question_id':[], 'answer':[]};
-		$scope.questsow='1';
-		$scope.scratchpad = false;
-		$scope.calculator = false;
-		$scope.cindex = "";
+		$scope.quests='1';
 		
 		// function to get questions
 		getQuestions = function(questionUrl, $answers){
-			console.log(questionUrl);
-			console.log($answers);
 			$scope.myAnswers ={'question_id':[], 'answer':[]};
 		    $http.post(questionUrl,$answers ).then(function(response){
-				console.log(response);
 		    	if (response.data.code == 206) {
-					$scope.questsow='0';
 		    		$scope.percentage = response.data.percentage;
 		    		$scope.score = response.data.score;
 		    		$scope.maxile = response.data.maxile;
 					$scope.totalQuestions = 0;
 			        $scope.activeQuestion = 0;
-			        $scope.myQuestions = [];	
+			        $scope.myQuestions = [];
+					
 		    	} else if (response.data.code == 203) {
-					$scope.enrolled = false;
+					$scope.unenrolled = 1;
 					$scope.sendMastercode = function(){
 						if($scope.mastercode.mastercode == undefined){
 							alert("Please insert mastercode");
 						}
 						else
 						{
-							if($scope.mastercode.firstname == undefined){
-								alert("Please insert First Name");
-							}
-							else{
-								if($scope.mastercode.lastname == undefined){
-									alert("Please insert Last Name");
-								}
-								else{
-									if($scope.mastercode.date_of_birth == undefined){
-										alert("Please insert Date Of Birth");
-									}
-									else{
-										getQuestions($scope.baseurl+'/test/mastercode',$scope.mastercode);	
-									}
-								}
-							}
+							
+							getQuestions($scope.baseurl+'/test/mastercode',$scope.mastercode);
+							
 						}	
 			    	}
 		    	} else {
@@ -62,15 +43,15 @@
 			    	$scope.myAnswers['test'] = response.data.test;
 			    	var questions = response.data.questions;
 			    	if (questions === undefined) {
-			    		alert("No questions found");
-						$scope.questsow='0';
+			    		alert("no questions found");
+						$scope.quests='0';
+						
 			    	}
 					else
 					{
 						for(var i=0; i<questions.length; i++){
 							$scope.myQuestions.push({
 								"id": questions[i].id,
-								"source": questions[i].source,
 								"question":questions[i].question,
 								"question_image":questions[i].question_image,
 								"answers":[{"id":0, "text":questions[i].answer0, "image":questions[i].answer0_image},
@@ -78,58 +59,33 @@
 										  {"id":2, "text":questions[i].answer2, "image":questions[i].answer2_image},
 										  {"id":3, "text":questions[i].answer3, "image":questions[i].answer3_image}],
 								"correct" : questions[i].correct_answer,
-								"type": questions[i].type_id,
-								"calculator":questions[i].calculator
+								"type": questions[i].type_id			    					
 							});
 						}
-						console.log($scope.myQuestions[0].calculator);
-						if($scope.myQuestions[0].calculator == "s" || $scope.myQuestions[0].calculator == "S"){
-							$scope.cindex = "s";
-						}
-						else{
-							if($scope.myQuestions[0].calculator == null || $scope.myQuestions[0].calculator == undefined){
-								$scope.cindex="x";
-							}
-							else{
-								$scope.cindex="x";
-							}
-						}
 					}						
+					
+					
 					$scope.totalQuestions = $scope.myQuestions.length;
 					$scope.activeQuestion = 0;
+					
+				    
+					
 			    }
 			},function(err){
-				alert("Error in retrieving question, or your login timed out. Login again.")
-			});
+						
+							alert("Mastercode is wrong");
+						
+						
+					});
 		}
 
-		// turn scratchpad on/off
-		$scope.scratchpadSwitch = function(){
-			$scope.scratchpad = $scope.scratchpad ? false : true;
-		}	
-
-		$scope.calculatorSwitch = function(){
-			$scope.calculator = $scope.calculator ? false : true;
-		}
-		
-		$scope.calculatorswitches = function(){
-			console.log($scope.cindex);
-			if($scope.cindex == "s"){
-				return true;
-			}
-			else{
-				return false;
-			}
-			
-		}
-		
 		// login and then get the questions from api
 		$scope.login = function(){
 		    // Set popup to true to use popup
 		    if (auth.isAuthenticated){
 				getQuestions($scope.baseurl+'/test/protected','');
 				$scope.percentage=0;
-				$scope.questsow = '1';
+				$scope.quests = '1';
 				$scope.score=0;
 		    }
 		    else {
@@ -158,12 +114,14 @@
 			auth.signout();
 		};
 		
-		$scope.selectAnswer = function(qIndex, aIndex){	
+		
+		
+		$scope.selectAnswer = function(qIndex, aIndex){
+			
 			var questionState = $scope.myQuestions[qIndex].questionState;
 			// check if answered
 			if (questionState != 'answered'){
 				$scope.myAnswers['question_id'].push($scope.myQuestions[qIndex].id);
-				//$scope.myAnswers['answer'].push([]);
 				if ($scope.myQuestions[qIndex].type == 1) {
 					$scope.myQuestions[qIndex].selectedAnswer=aIndex;
 					var correctAnswer = $scope.myQuestions[qIndex].correct;
@@ -178,17 +136,10 @@
 						$scope.myQuestions[qIndex].crts = 'incorrect';
 					}
 				} else if ($scope.myQuestions[qIndex].type == 2) {
-					$scope.myAnswers['answer'].push([]);
-					
- 					$scope.myAnswers.answer[qIndex].push($scope.myQuestions[qIndex].answers[0].text != null ? $('#question_'+$scope.myQuestions[qIndex].id).children("input[type='number']:first").val() : null);
- 					$scope.myAnswers.answer[qIndex].push($scope.myQuestions[qIndex].answers[1].text != null ? $('#question_'+$scope.myQuestions[qIndex].id).children("input[type='number']:eq(1)").val() : null);
- 					$scope.myAnswers.answer[qIndex].push($scope.myQuestions[qIndex].answers[2].text != null ? $('#question_'+$scope.myQuestions[qIndex].id).children("input[type='number']:eq(2)").val() : null);
- 					$scope.myAnswers.answer[qIndex].push($scope.myQuestions[qIndex].answers[3].text != null ? $('#question_'+$scope.myQuestions[qIndex].id).children("input[type='number']:eq(3)").val() : null);
- 					if (Number($scope.myQuestions[qIndex].answers[0].text) != Number($scope.myAnswers.answer[qIndex][0]) ||
- 						Number($scope.myQuestions[qIndex].answers[1].text) != Number($scope.myAnswers.answer[qIndex][1]) ||
- 						Number($scope.myQuestions[qIndex].answers[2].text) != Number($scope.myAnswers.answer[qIndex][2]) ||
- 						Number($scope.myQuestions[qIndex].answers[3].text) != Number($scope.myAnswers.answer[qIndex][3])){
-
+					if ($scope.myQuestions[qIndex].answers[0].text != $scope.myAnswers.answer[qIndex][0] ||
+						$scope.myQuestions[qIndex].answers[1].text != $scope.myAnswers.answer[qIndex][1] ||
+						$scope.myQuestions[qIndex].answers[2].text != $scope.myAnswers.answer[qIndex][2] ||
+						$scope.myQuestions[qIndex].answers[3].text != $scope.myAnswers.answer[qIndex][3]) {
 						$scope.myQuestions[qIndex].correctness = 'incorrect';
 					} else {
 						$scope.myQuestions[qIndex].correctness = 'correct';
@@ -208,52 +159,58 @@
 		}
 		$scope.selectContinue = function(qIndex){
 			$scope.myQuestions[qIndex].crts="abc";
-			//console.log($scope.myQuestions[qIndex + 1].calculator);
-			if($scope.myQuestions[qIndex +1] != undefined){
-				if($scope.myQuestions[qIndex + 1].calculator == undefined || $scope.myQuestions[qIndex + 1].calculator == null){
-					$scope.cindex = "x";
-					console.log($scope.cindex);
-				}
-				else{
-					if($scope.myQuestions[qIndex + 1].calculator == "S" || $scope.myQuestions[qIndex + 1].calculator == "s"){
-						$scope.cindex="s";
-						console.log($scope.cindex);
-					}
-					else
-					{
-						$scope.cindex="x";
-						console.log($scope.cindex);
-					}
-				}
-			}
-			
 			if ($scope.totalQuestions == $scope.activeQuestion+1){
 				getQuestions($scope.baseurl+'/test/answers',$scope.myAnswers);
-				
 			} else
 			
 			return $scope.activeQuestion += 1;
 		}
 		
 		$scope.questionshowing = function(qIndex){
-			return qIndex == $scope.activeQuestion ? true : false;
+			
+			if(qIndex == $scope.activeQuestion)
+			{
+				return true;
+				
+			}
+			else
+			{
+				return false;
+				
+			}
 		}
 		
-		//$scope.resulting = $scope.quests == '0' ? true :false;
-		$scope.resulting=function(){
-			console.log($scope.questsow);
-			if($scope.questsow='0'){
+		$scope.resulting = function(){
+			
+			if($scope.quests == '0')
+			{
+				
 				return true;
 			}
-			else{
+			else
+			{
 				return false;
 			}
 		}
 		
 		$scope.continuetohide = function(qIndex){
-			return $scope.myQuestions[qIndex].correctness == 'correct' || $scope.myQuestions[qIndex].correctness == 'incorrect' ? true : false;
+			if($scope.myQuestions[qIndex].correctness == 'correct')
+			{
+				return true;
+			}
+			else 
+			{
+				if($scope.myQuestions[qIndex].correctness == 'incorrect')
+				{
+					return true;
+				}
+				else
+				{
+					return false;
+				}
+			}
+			
 		}
-		
 		$scope.createShareLinks = function(percentage){
 			var url='http://www.all-gifted.com';
 			//var emailLink = '<a class="btn email" href = "mailto:ace.allgifted@gmail.com" ng-click="logout()">Email parent</a>';
@@ -283,7 +240,7 @@
 			return store.get('token');
 		}
 	    jwtOptionsProvider.config({
-	      whiteListedDomains: ['math.all-gifted.com', 'localhost', 'quizapi.pamelalim.me', 'quiz.all-gifted.com', 'devquiz.pamelalim.me']
+	      whiteListedDomains: ['math.all-gifted.com', 'localhost']
 	    });
 		$httpProvider.interceptors.push('jwtInterceptor');
 	});
@@ -305,12 +262,10 @@
 	        }
 	      } else {
 	        // Either show the login page
-			store.remove('profile');
-			store.remove('token');
-	        $location.path('/');
+	        // $location.path('/');
 	        // .. or
 	        // or use the refresh token to get a new idToken
-	        //auth.refreshIdToken(token);
+	        auth.refreshIdToken(token);
 	      }
 	    }
 
@@ -329,6 +284,6 @@
 				});
 			}         
 		}
-	});
+});
 	
 })();

@@ -46,7 +46,7 @@ conversion = {
     ref = snapshot.shapes;
     results = [];
     for (i = 0, len = ref.length; i < len; i++) {
-      shape = ref[i];
+     shape = ref[i];
       results.push(shapes.JSONToShape(shape));
     }
     return results;
