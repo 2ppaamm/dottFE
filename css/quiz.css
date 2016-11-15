@@ -113,7 +113,11 @@ body { background-color: #fff; width:100%; }
 
 #mathQuiz .question .ans.image {
 	width:225px; min-height:110px; padding: 0px; background-repeat: no-repeat;
+<<<<<<< HEAD
 	background-position: 0px 0px; background-size:40%;
+=======
+	background-position: 0px 0px; background-size:100%;
+>>>>>>> 5444d2b36c38e81ae311569fe9d6f9f2c358b5c7
 }
 
 #mathQuiz .question .ans.selected { border-color: #be4616 }
