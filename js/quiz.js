@@ -9,6 +9,7 @@
 		$scope.activeQuestionAnswered = 0;
 		$scope.percentage = 0;
 		$scope.maxile = 0;
+		$scope.kudos = 0;
 		$scope.enrolled = true;
 		$scope.mastercode = {};
 		$scope.myAnswers ={'question_id':[], 'answer':[]};
@@ -29,6 +30,7 @@
 		    		$scope.percentage = response.data.percentage;
 		    		$scope.score = response.data.score;
 		    		$scope.maxile = response.data.maxile;
+					$scope.kudos = response.data.kudos;
 					$scope.totalQuestions = 0;
 			        $scope.activeQuestion = 0;
 			        $scope.myQuestions = [];	
