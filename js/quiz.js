@@ -287,7 +287,7 @@
 			return store.get('token');
 		}
 	    jwtOptionsProvider.config({
-	      whiteListedDomains: ['math.all-gifted.com', 'quiz.all-gifted.com', 'prodquizapi.pamelalim.me']
+	      whiteListedDomains: ['math.all-gifted.com', 'quiz.all-gifted.com', 'prodquizapi.pamelalim.me', 'prodquiz.pamelalim.me']
 	    });
 		$httpProvider.interceptors.push('jwtInterceptor');
 	});
