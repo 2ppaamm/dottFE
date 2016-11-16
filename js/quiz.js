@@ -2,8 +2,8 @@
 	var	app = angular.module('mathQuiz', ['katex','auth0', 'angular-storage', 'angular-jwt', 'ngRoute','ngLoadingSpinner']);
 	app.controller('QuizController',
 	 ['$scope', '$http', '$sce', 'auth', 'store', 'katexConfig','$window', function($scope, $http, $sce, auth, store, katexConfig,$window){
-//		$scope.baseurl = "http://devquizapi.pamelalim.me"
-		$scope.baseurl = "http://localhost:8000"
+		$scope.baseurl = "http://prodquizapi.pamelalim.me"
+//		$scope.baseurl = "http://localhost:8000"
 		$scope.score = 0;
 		$scope.activeQuestion = -1;
 		$scope.activeQuestionAnswered = 0;
@@ -287,7 +287,7 @@
 			return store.get('token');
 		}
 	    jwtOptionsProvider.config({
-	      whiteListedDomains: ['math.all-gifted.com', 'localhost', 'quizapi.pamelalim.me', 'quiz.all-gifted.com', 'devquizapi.pamelalim.me', 'devquiz.pamelalim.me']
+	      whiteListedDomains: ['math.all-gifted.com', 'quiz.all-gifted.com', 'prodquizapi.pamelalim.me']
 	    });
 		$httpProvider.interceptors.push('jwtInterceptor');
 	});
