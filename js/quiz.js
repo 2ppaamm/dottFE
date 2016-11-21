@@ -20,11 +20,8 @@
 		
 		// function to get questions
 		getQuestions = function(questionUrl, $answers){
-			console.log(questionUrl);
-			console.log($answers);
 			$scope.myAnswers ={'question_id':[], 'answer':[]};
 		    $http.post(questionUrl,$answers ).then(function(response){
-				console.log(response);
 		    	if (response.data.code == 206) {
 					$scope.questsow='0';
 		    		$scope.percentage = response.data.percentage;
@@ -54,7 +51,6 @@
 										alert("Please insert Date Of Birth");
 									}
 									else{
-										console.log($scope.mastercode.date_of_birth);
 										getQuestions($scope.baseurl+'/test/mastercode',$scope.mastercode);	
 									}
 								}
@@ -86,7 +82,6 @@
 								"calculator":questions[i].calculator
 							});
 						}
-						console.log($scope.myQuestions[0].calculator);
 						if($scope.myQuestions[0].calculator == "s" || $scope.myQuestions[0].calculator == "S"){
 							$scope.cindex = "s";
 						}
@@ -117,7 +112,6 @@
 		}
 		
 		$scope.calculatorswitches = function(){
-			console.log($scope.cindex);
 			if($scope.cindex == "s"){
 				return true;
 			}
@@ -160,7 +154,7 @@
 			store.remove('profile');
 			store.remove('token');
 			auth.signout();
-			$window.location.href="http://quiz.pamelalim.me";
+			$window.location.href="http://quiz.all-gifted.com";
 		};
 		
 		$scope.selectAnswer = function(qIndex, aIndex){	
@@ -212,21 +206,17 @@
 		}
 		$scope.selectContinue = function(qIndex){
 			$scope.myQuestions[qIndex].crts="abc";
-			//console.log($scope.myQuestions[qIndex + 1].calculator);
 			if($scope.myQuestions[qIndex +1] != undefined){
 				if($scope.myQuestions[qIndex + 1].calculator == undefined || $scope.myQuestions[qIndex + 1].calculator == null){
 					$scope.cindex = "x";
-					console.log($scope.cindex);
 				}
 				else{
 					if($scope.myQuestions[qIndex + 1].calculator == "S" || $scope.myQuestions[qIndex + 1].calculator == "s"){
 						$scope.cindex="s";
-						console.log($scope.cindex);
 					}
 					else
 					{
 						$scope.cindex="x";
-						console.log($scope.cindex);
 					}
 				}
 			}
@@ -245,7 +235,6 @@
 		
 		//$scope.resulting = $scope.quests == '0' ? true :false;
 		$scope.resulting=function(){
-			console.log($scope.questsow);
 			if($scope.questsow='0'){
 				return true;
 			}
@@ -287,7 +276,7 @@
 			return store.get('token');
 		}
 	    jwtOptionsProvider.config({
-	      whiteListedDomains: ['math.all-gifted.com', 'quiz.all-gifted.com', 'prodquizapi.pamelalim.me', 'prodquiz.pamelalim.me']
+	      whiteListedDomains: ['math.all-gifted.com', 'localhost','quiz.all-gifted.com', 'prodquizapi.pamelalim.me', 'prodquiz.pamelalim.me']
 	    });
 		$httpProvider.interceptors.push('jwtInterceptor');
 	});
