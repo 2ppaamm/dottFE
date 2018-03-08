@@ -2,7 +2,7 @@
 	var	app = angular.module('mathQuiz', ['katex','auth0', 'angular-storage', 'angular-jwt', 'ngRoute','ngLoadingSpinner']);
 	app.controller('QuizController',
 	 ['$scope', '$http', '$sce', 'auth', 'store', 'katexConfig','$window', function($scope, $http, $sce, auth, store, katexConfig,$window){
-		$scope.baseurl = "http://prodquizapi.pamelalim.me"
+		$scope.baseurl = "http://api.pamelalim.me"
 //		$scope.baseurl = "http://localhost:8000"
 		$scope.score = 0;
 		$scope.activeQuestion = -1;
@@ -268,15 +268,17 @@
 
 	app.config( function(authProvider, $httpProvider, jwtInterceptorProvider, jwtOptionsProvider) {
 		authProvider.init({
-		    domain: 'allgiftedllc.au.auth0.com',
-		    clientID: 'bs3jSKz2Ewrye8dD2qRVrD0Tra2tOqHC'
+    		domain: 'pamelalim.auth0.com',
+			clientID: 'eVJv6UFM9GVdukBWiURczRCxmb6iaUYG'
+	//	    domain: 'allgiftedllc.au.auth0.com',
+	//	    clientID: 'bs3jSKz2Ewrye8dD2qRVrD0Tra2tOqHC'
 		});
 
 		jwtInterceptorProvider.tokenGetter = function(store) {
 			return store.get('token');
 		}
 	    jwtOptionsProvider.config({
-	      whiteListedDomains: ['math.all-gifted.com', 'localhost','quiz.all-gifted.com', 'prodquizapi.pamelalim.me', 'prodquiz.pamelalim.me']
+	      whiteListedDomains: ['math.pamelalim.me', 'localhost','quiz.pamelalim.me', 'api.pamelalim.me','localhost:4200']
 	    });
 		$httpProvider.interceptors.push('jwtInterceptor');
 	});
