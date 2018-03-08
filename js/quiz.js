@@ -268,10 +268,10 @@
 
 	app.config( function(authProvider, $httpProvider, jwtInterceptorProvider, jwtOptionsProvider) {
 		authProvider.init({
-    		domain: 'pamelalim.auth0.com',
-			clientID: 'eVJv6UFM9GVdukBWiURczRCxmb6iaUYG'
-	//	    domain: 'allgiftedllc.au.auth0.com',
-	//	    clientID: 'bs3jSKz2Ewrye8dD2qRVrD0Tra2tOqHC'
+//    		domain: 'pamelalim.auth0.com',
+//			clientID: 'eVJv6UFM9GVdukBWiURczRCxmb6iaUYG'
+		    domain: 'allgiftedllc.au.auth0.com',
+		    clientID: 'bs3jSKz2Ewrye8dD2qRVrD0Tra2tOqHC'
 		});
 
 		jwtInterceptorProvider.tokenGetter = function(store) {
