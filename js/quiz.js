@@ -132,6 +132,7 @@
 		    }
 		    else {
 		    	auth.signin({
+					sso: false,
 		    		popup: true,
 		            title: "Login me in",
 		            gravatar:false,
