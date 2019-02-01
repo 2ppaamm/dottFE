@@ -145,7 +145,6 @@
 			        store.set('token', token);
 			        getQuestions($scope.baseurl+'/test/protected','');
 			    }, function(err){
-			    	alert(err);
 			    	alert('unable to signin');
 		    	})
 		    };
