@@ -55,6 +55,10 @@
 											getQuestions($scope.baseurl+'/test/mastercode',$scope.mastercode);	
 										} else {
 											alert("Please verify your email before get questions");
+											store.remove('profile');
+											store.remove('token');
+											auth.signout();
+											window.location.reload();
 										}
 									}
 								}
@@ -102,10 +106,14 @@
 					$scope.activeQuestion = 0;
 			    }
 			},function(err){
+<<<<<<< HEAD
 				if (err.status == 500){
 					alert("Unable to login. Please refresh your screen and try again.");
 				}
 				else alert(err.data.message);
+=======
+				alert("Error in retrieving question, or your login timed out. Login again.");
+>>>>>>> ab91384b26de58c006660a500b18d80c8cd944a4
 			});
 		}
 
