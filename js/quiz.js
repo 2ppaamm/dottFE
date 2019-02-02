@@ -109,7 +109,7 @@
 				if (err.status == 500){
 					alert("Unable to login. Please refresh your screen and try again.");
 				}
-				else alert("Error login.");
+				else alert(err.data.message);
 			});
 		}
 
