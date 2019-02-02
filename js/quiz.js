@@ -51,11 +51,15 @@
 										alert("Please insert Date Of Birth");
 									}
 									else{
-										getQuestions($scope.baseurl+'/test/mastercode',$scope.mastercode);	
+										if (store.inMemoryCache.profile.email_verified) {
+											getQuestions($scope.baseurl+'/test/mastercode',$scope.mastercode);	
+										} else {
+											alert("Please verify your email before get questions");
+										}
 									}
 								}
 							}
-						}	
+						}
 			    	}
 		    	} else {
 					$scope.myQuestions =[];
