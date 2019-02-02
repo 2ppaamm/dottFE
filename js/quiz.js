@@ -55,7 +55,10 @@
 											getQuestions($scope.baseurl+'/test/mastercode',$scope.mastercode);	
 										} else {
 											alert("Please verify your email before get questions");
-											window.location.reload();
+											store.remove('profile');
+											store.remove('token');
+											auth.signout();
+											$window.location.href="http://quiz.all-gifted.com";
 										}
 									}
 								}
