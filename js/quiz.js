@@ -58,7 +58,7 @@
 											store.remove('profile');
 											store.remove('token');
 											auth.signout();
-											$window.location.href="http://quiz.all-gifted.com";
+											window.location.reload();
 										}
 									}
 								}
