@@ -98,7 +98,10 @@
 					$scope.activeQuestion = 0;
 			    }
 			},function(err){
-				alert("Error in retrieving question, or your login timed out. Login again.")
+				if (err.status == 500){
+					alert("Unable to login. Please refresh your screen and try again.");
+				}
+				else alert(err.data.message);
 			});
 		}
 
