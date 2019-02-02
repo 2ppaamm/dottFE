@@ -55,6 +55,7 @@
 											getQuestions($scope.baseurl+'/test/mastercode',$scope.mastercode);	
 										} else {
 											alert("Please verify your email before get questions");
+											window.location.reload();
 										}
 									}
 								}
@@ -102,7 +103,7 @@
 					$scope.activeQuestion = 0;
 			    }
 			},function(err){
-				alert("Error in retrieving question, or your login timed out. Login again.")
+				alert("Error in retrieving question, or your login timed out. Login again.");
 			});
 		}
 
