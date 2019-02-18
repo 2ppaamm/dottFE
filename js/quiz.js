@@ -8,6 +8,7 @@
 		$scope.activeQuestion = -1;
 		$scope.activeQuestionAnswered = 0;
 		$scope.percentage = 0;
+		$scope.message ="Hello!";
 		$scope.maxile = 0;
 		$scope.kudos = 0;
 		$scope.enrolled = true;
@@ -28,6 +29,8 @@
 		    		$scope.score = response.data.score;
 		    		$scope.maxile = response.data.maxile;
 					$scope.kudos = response.data.kudos;
+					$scope.message = response.data.message;
+					alert($scope.message);
 					$scope.totalQuestions = 0;
 			        $scope.activeQuestion = 0;
 			        $scope.myQuestions = [];	
@@ -54,7 +57,7 @@
 										if (store.inMemoryCache.profile.email_verified) {
 											getQuestions($scope.baseurl+'/test/mastercode',$scope.mastercode);	
 										} else {
-											alert("Please verify your email before get questions");
+											alert("Please verify your email before accessing the account.");
 											store.remove('profile');
 											store.remove('token');
 											auth.signout();
@@ -280,8 +283,8 @@
 
 	app.config( function(authProvider, $httpProvider, jwtInterceptorProvider, jwtOptionsProvider) {
 		authProvider.init({
-   // 		domain: 'pamelalim.auth0.com',
-	//		clientID: 'eVJv6UFM9GVdukBWiURczRCxmb6iaUYG'
+//    		domain: 'pamelalim.auth0.com',
+//			clientID: 'eVJv6UFM9GVdukBWiURczRCxmb6iaUYG'
 		    domain: 'allgiftedllc.au.auth0.com',
 		    clientID: 'bs3jSKz2Ewrye8dD2qRVrD0Tra2tOqHC'
 		});
@@ -292,8 +295,7 @@
 	    jwtOptionsProvider.config({
 	      whiteListedDomains: [
 	      'math.pamelalim.me', 'quiz.pamelalim.me', 'mathapi.pamelalim.me',
-	      'math.all-gifted.com','quiz.all-gifted.com',
-	      'localhost','localhost:4200']
+	      'math.all-gifted.com','quiz.all-gifted.com']
 	    });
 		$httpProvider.interceptors.push('jwtInterceptor');
 	});
