@@ -2,8 +2,8 @@
 	var	app = angular.module('mathQuiz', ['katex','auth0', 'angular-storage', 'angular-jwt', 'ngRoute','ngLoadingSpinner']);
 	app.controller('QuizController',
 	 ['$scope', '$http', '$sce', 'auth', 'store', 'katexConfig','$window', function($scope, $http, $sce, auth, store, katexConfig,$window){
-		$scope.baseurl = "https://mathapi.pamelalim.me"
-//		$scope.baseurl = "http://localhost:8000"
+//		$scope.baseurl = "https://mathapi.pamelalim.me"
+		$scope.baseurl = "http://localhost:8000"
 		$scope.score = 0;
 		$scope.activeQuestion = -1;
 		$scope.activeQuestionAnswered = 0;
@@ -110,7 +110,7 @@
 			    }
 			},function(err){
 				if (err.status == 500){
-					alert("Unable to login. Please refresh your screen and try again.");
+					alert(err.data.message);
 				}
 				else alert(err.data.message);
 			});
@@ -150,7 +150,7 @@
 		    		popup: true,
 		            title: "Login me in",
 		            gravatar:false,
-		            icon: "http://school.all-gifted.com/pluginfile.php/1/theme_lambda/logo/1472088488/newlogo.png",
+		            icon: "https://school.all-gifted.com/pluginfile.php/1/theme_lambda/logo/1549536749/logo.png",
 		            authParams: {
 		                scope: 'openid email name picture' 
 		            }		    		
@@ -295,7 +295,7 @@
 	    jwtOptionsProvider.config({
 	      whiteListedDomains: [
 	      'math.pamelalim.me', 'quiz.pamelalim.me', 'mathapi.pamelalim.me',
-	      'math.all-gifted.com','quiz.all-gifted.com']
+	      'math.all-gifted.com','quiz.all-gifted.com','localhost:8000','localhost']
 	    });
 		$httpProvider.interceptors.push('jwtInterceptor');
 	});

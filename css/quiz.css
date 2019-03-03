@@ -97,6 +97,8 @@ body { background-color: #fff; width:100%; }
 	padding:10px; margin: 0px 15px 15px 0px; position: relative; background-color:white; z-index:40;
 }
 
+#mathQuiz .question input[type=number]{width: 175px;} 
+
 #mathQuiz .question .keyans { 
 	display: inline-block; font-size: 1.1em; width: 225px;border: 2px solid rgba(238,189,102,.4); 
 	padding:10px; margin: 0px 15px 15px 0px; position: relative;
