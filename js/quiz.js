@@ -2,12 +2,13 @@
 	var	app = angular.module('mathQuiz', ['katex','auth0', 'angular-storage', 'angular-jwt', 'ngRoute','ngLoadingSpinner']);
 	app.controller('QuizController',
 	 ['$scope', '$http', '$sce', 'auth', 'store', 'katexConfig','$window', function($scope, $http, $sce, auth, store, katexConfig,$window){
-//		$scope.baseurl = "https://mathapi.pamelalim.me"
-		$scope.baseurl = "http://localhost:8000"
+		$scope.baseurl = "https://mathapi.pamelalim.me"
+//		$scope.baseurl = "http://localhost:8000"
 		$scope.score = 0;
 		$scope.activeQuestion = -1;
 		$scope.activeQuestionAnswered = 0;
 		$scope.percentage = 0;
+		$scope.message ="Hello!";
 		$scope.maxile = 0;
 		$scope.kudos = 0;
 		$scope.enrolled = true;
@@ -30,6 +31,8 @@
 		    		$scope.score = response.data.score;
 		    		$scope.maxile = response.data.maxile;
 					$scope.kudos = response.data.kudos;
+					$scope.message = response.data.message;
+					alert($scope.message);
 					$scope.totalQuestions = 0;
 			        $scope.activeQuestion = 0;
 			        $scope.myQuestions = [];	
@@ -56,7 +59,7 @@
 										if (store.inMemoryCache.profile.email_verified) {
 											getQuestions($scope.baseurl+'/test/mastercode',$scope.mastercode);	
 										} else {
-											alert("Please verify your email before get questions");
+											alert("Please verify your email before accessing the account.");
 											store.remove('profile');
 											store.remove('token');
 											auth.signout();
@@ -109,7 +112,7 @@
 			    }
 			},function(err){
 				if (err.status == 500){
-					alert("Unable to login. Please refresh your screen and try again.");
+					alert(err.data.message);
 				}
 				else alert(err.data.message);
 			});
@@ -149,7 +152,7 @@
 		    		popup: true,
 		            title: "Login me in",
 		            gravatar:false,
-		            icon: "http://school.all-gifted.com/pluginfile.php/1/theme_lambda/logo/1472088488/newlogo.png",
+		            icon: "https://school.all-gifted.com/pluginfile.php/1/theme_lambda/logo/1549536749/logo.png",
 		            authParams: {
 		                scope: 'openid email name picture' 
 		            }		    		
@@ -282,8 +285,8 @@
 
 	app.config( function(authProvider, $httpProvider, jwtInterceptorProvider, jwtOptionsProvider) {
 		authProvider.init({
-   // 		domain: 'pamelalim.auth0.com',
-	//		clientID: 'eVJv6UFM9GVdukBWiURczRCxmb6iaUYG'
+//    		domain: 'pamelalim.auth0.com',
+//			clientID: 'eVJv6UFM9GVdukBWiURczRCxmb6iaUYG'
 		    domain: 'allgiftedllc.au.auth0.com',
 		    clientID: 'bs3jSKz2Ewrye8dD2qRVrD0Tra2tOqHC'
 		});
@@ -294,8 +297,7 @@
 	    jwtOptionsProvider.config({
 	      whiteListedDomains: [
 	      'math.pamelalim.me', 'quiz.pamelalim.me', 'mathapi.pamelalim.me',
-	      'math.all-gifted.com','quiz.all-gifted.com',
-	      'localhost','localhost:4200']
+	      'math.all-gifted.com','quiz.all-gifted.com','localhost:8000','localhost']
 	    });
 		$httpProvider.interceptors.push('jwtInterceptor');
 	});
