@@ -17,13 +17,15 @@
 		$scope.scratchpad = false;
 		$scope.calculator = false;
 		$scope.cindex = "";
-		
+		$scope.resultmsg = "";
+	
 		// function to get questions
 		getQuestions = function(questionUrl, $answers){
 			$scope.myAnswers ={'question_id':[], 'answer':[]};
 		    $http.post(questionUrl,$answers ).then(function(response){
 		    	if (response.data.code == 206) {
 					$scope.questsow='0';
+		    		$scope.resultmsg = response.data.message;
 		    		$scope.percentage = response.data.percentage;
 		    		$scope.score = response.data.score;
 		    		$scope.maxile = response.data.maxile;
