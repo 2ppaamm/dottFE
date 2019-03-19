@@ -74,7 +74,7 @@
 				<br>
 				<p>{{resultmsg}}</p>
 				<p>You scored {{percentage | number:2}}% and {{kudos}} kudos for the latest test<span ng-if="maxile > 0">, and now your maxile level is {{maxile}}</span>.</p>
-				<p>What do you want to do next?</p>
+				<div>What do you want to do next?</div>
 				<div class="share" ng-bind-html = "createShareLinks(percentage)" compile-template></div>
 				<div><a ng-click="logout()" class="btn end" href="#">End Test</a></div>
 			</div>
