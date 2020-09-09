@@ -297,7 +297,7 @@
 	    jwtOptionsProvider.config({
 	      whiteListedDomains: [
 	      'math.pamelalim.me', 'quiz.pamelalim.me', 'mathapi.pamelalim.me',
-	      'math.all-gifted.com','quiz.all-gifted.com','localhost:8000','localhost']
+	      'math.all-gifted.com','quiz.all-gifted.com','localhost:8000','localhost', 'devquiz.allgifted.com', 'devapi.allgifted.com']
 	    });
 		$httpProvider.interceptors.push('jwtInterceptor');
 	});
