@@ -171,7 +171,7 @@
 			store.remove('profile');
 			store.remove('token');
 			auth.signout();
-			$window.location.href="http://quiz.all-gifted.com";
+			$window.location.href="http://quiz.allgifted.com";
 		};
 		
 		$scope.selectAnswer = function(qIndex, aIndex){	
@@ -265,7 +265,7 @@
 		}
 		
 		$scope.createShareLinks = function(percentage){
-			var url='http://www.all-gifted.com';
+			var url='http://www.allgifted.com';
 			//var emailLink = '<a class="btn email" href = "mailto:ace.allgifted@gmail.com" ng-click="logout()">Email parent</a>';
 			//var twitterLink = '<a class="btn twitter" href="#" ng-click="logout()">Tweet parent</a>';
 			var domoreLink = '<a class="btn domore" href="#" ng-click="login()">Do some more!</a>';
