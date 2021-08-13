@@ -152,7 +152,7 @@
 		    		popup: true,
 		            title: "Login me in",
 		            gravatar:false,
-		            icon: "https://school.all-gifted.com/pluginfile.php/1/theme_lambda/logo/1549536749/logo.png",
+		            icon: "https://www.allgifted.com/wp-content/uploads/2020/06/ags@2x-trans.png",
 		            authParams: {
 		                scope: 'openid email name picture' 
 		            }		    		
