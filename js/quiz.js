@@ -285,10 +285,10 @@
 
 	app.config( function(authProvider, $httpProvider, jwtInterceptorProvider, jwtOptionsProvider) {
 		authProvider.init({
-//    		domain: 'pamelalim.auth0.com',
-//			clientID: 'eVJv6UFM9GVdukBWiURczRCxmb6iaUYG'
-		    domain: 'allgiftedllc.au.auth0.com',
-		    clientID: 'bs3jSKz2Ewrye8dD2qRVrD0Tra2tOqHC'
+    		domain: 'pamelalim.auth0.com',
+			clientID: 'eVJv6UFM9GVdukBWiURczRCxmb6iaUYG'
+//		    domain: 'allgiftedllc.au.auth0.com',
+//		    clientID: 'bs3jSKz2Ewrye8dD2qRVrD0Tra2tOqHC'
 		});
 
 		jwtInterceptorProvider.tokenGetter = function(store) {
@@ -296,7 +296,7 @@
 		}
 	    jwtOptionsProvider.config({
 	      whiteListedDomains: [
-	      'math.pamelalim.me', 'quiz.pamelalim.me', 'mathapi.pamelalim.me',
+	      'math.pamelalim.me', 'quiz.pamelalim.me', 'mathapi.pamelalim.me', 'localhost',
 	      'math.allgifted.com','quiz.allgifted.com','localhost:8000','localhost', 'devfe.allgifted.com','devquiz.allgifted.com', 'devapi.allgifted.com']
 	    });
 		$httpProvider.interceptors.push('jwtInterceptor');
