@@ -171,7 +171,7 @@
 			store.remove('profile');
 			store.remove('token');
 			auth.signout();
-			$window.location.href="http://quiz.allgifted.com";
+			$window.location.href="https://quiz.allgifted.com";
 		};
 		
 		$scope.selectAnswer = function(qIndex, aIndex){	
@@ -297,7 +297,7 @@
 	    jwtOptionsProvider.config({
 	      whiteListedDomains: [
 	      'https://math.pamelalim.me', 'mathapi.pamelalim.me', 'localhost',
-	      'https://math.allgifted.com','https://quiz.allgifted.com','localhost:8000','localhost']
+	      'https://math.allgifted.com','https://quiz.allgifted.com','localhost:8000']
 	    });
 		$httpProvider.interceptors.push('jwtInterceptor');
 	});
