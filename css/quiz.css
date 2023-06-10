@@ -62,6 +62,7 @@ body { background-color: #fff; width:100%; }
 	z-index:40;
 }
 
+/* Exit Button*/
 #mathQuiz #exit {
     position: fixed;
     top: 10px;
