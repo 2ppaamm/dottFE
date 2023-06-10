@@ -26,10 +26,10 @@
 					{{ (myQuestion.correctness === 'correct') ? 'correct' : 'incorrect'}}"
 					ng-repeat="myQuestion in myQuestions"></div>
 				</div>
-				<div class="question noselect
-					{{ $index === activeQuestion ? 'active':'inactive'}} {{ myQuestion.questionState === 'answered' ? 'answered':'unanswered'}} visibilityhide" ng-repeat="myQuestion in myQuestions" ng-show="questionshowing($index)" id="mathquestionshow">
+				<div class="question noselect      active answered" ng-repeat="myQuestion in myQuestions" ng-show="questionshowing($index)" id="mathquestionshow">
 					<p id="exit" ng-click="logout()" class="btn end" href="#">Exit test</p>
 				</div>
+			</div>
 			<div class="intro noselect {{ (activeQuestion > -1) ? 'inactive' :'active'}}">
 				<div ng-if="enrolled">
 					<h2>Welcome</h2>
@@ -64,7 +64,6 @@
 				</div>
 				<div ng-show="myQuestion.type == 2" ng-if="myQuestion.questionState != 'answered'">
 					<p ng-click="selectAnswer($index,0)" class="keybtn">Submit</p>
-				</div>
 				</div>
 				<div class="feedback">
 					<p ng-show="myQuestion.correctness === 'correct'">You are <strong>correct</strong>!</p>
