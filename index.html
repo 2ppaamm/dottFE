@@ -78,7 +78,7 @@
 				{{ $index === activeQuestion ? 'active':'inactive'}} {{ myQuestion.questionState === 'answered' ? 'answered':'unanswered'}} visibilityhide" ng-repeat="myQuestion in myQuestions" ng-show="questionshowing($index)" id="mathquestionshow">
 				<div ng-repeat="question in questions">
 					<div ng-if="question.id === myQuestion.id">
-						<h1>{{ question.skill.tracks[0].track }}</h1>
+						<h1>{{ question.skill.tracks[0] }}</h1>
 						<div class="trackprogressbar" id="{{ question.skill.tracks[0].id }}"></div>	
 						<div class="trackprogressbarvoid"></div>
 					</div>
@@ -109,6 +109,7 @@
 					<div class="btn" ng-click="selectContinue($index)" ng-show="continuetohide($index)">Continue</div>
 				</div>
 			</div>
+
 			<div katex bind="Answer.text" auto-render
 						ng-repeat="Answer in myQuestions[$index].answers"
 						ng-show = "Answer.text != null || Answer.image != null"
@@ -127,7 +128,7 @@
 				<p>{{resultmsg}}</p>
 				<p>You scored {{percentage | number:2}}% and {{kudos}} kudos for the latest test<span ng-if="maxile > 0">, and now your maxile level is {{maxile}}</span>.</p>
 				<div>What do you want to do next?</div>
-				<div class="share" ng-bind-html = "createShareLinks(percentage)" compile-template></div>
+				<!--<div class="share" ng-bind-html = "createShareLinks(percentage)" compile-template></div>-->
 				<div><a ng-click="logout()" class="btn end" href="#">End Test</a></div>
 			</div>
 			<!-- codes for the calculator -->

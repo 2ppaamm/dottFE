@@ -16,7 +16,6 @@
 		$scope.myAnswers ={'question_id':[], 'answer':[]};
 		$scope.questsow='1';
 		$scope.scratchpad = false;
-		$scope.calculator = false;
 		$scope.cindex = "";
 		$scope.resultmsg = "";
 		$scope.showskills = 0;
@@ -30,10 +29,13 @@
 		$scope.completedskills = 0;
 		$scope.tracks = 0;
 		$scope.welcome = 1;
+		$scope.testscompleted = 0;
+
 	
 		getLoginInfo = function(loginUrl, $loginInfo){
 			console.log(loginUrl);
 //			$scope.myAnswers ={'question_id':[], 'answer':[]};\
+
 		    $http.post(loginUrl,$loginInfo).then(function(response){
 		    	if (response.data.code == 206) {       // user does not have an account
 		    		alert(response.data.code);
@@ -94,7 +96,11 @@
 
 		    		}
 		    		console.log(response.data);
-		    		$scope.showcontinue = 1;
+		    		if (response.data.continuetrigger > 0) {
+		    			$scope.testscompleted = 1;
+		    		}
+
+		    		$scope.showcontinue = 1 &&  $scope.testscompleted;
 		    		$scope.showtest = 1;
 		    		$scope.showwelcome = 1;
 					/*$scope.myQuestions =[];
@@ -146,10 +152,8 @@
 
 		// function to get questions
 		getQuestions = function(questionUrl, $answers){
-			console.log("getquestions");
-			console.log(questionUrl);
 			$scope.myAnswers ={'question_id':[], 'answer':[]};
-		    $http.post(questionUrl,$answers ).then(function(response){
+		    $http.post(questionUrl,$answers).then(function(response){
 		    	if (response.data.code == 206) {
 					$scope.questsow='0';
 		    		$scope.resultmsg = response.data.message;
@@ -198,12 +202,13 @@
 			    	}
 		    	} else {
 		    		// 
-		    		console.log(response.data);
-		    		console.log(response.data.test);
+		    		console.log("response.data:", response.data);
 					$scope.myQuestions =[];
 			    	$scope.myAnswers['test'] = response.data.test;
 			    	$scope.questions = response.data.questions;
 			    	var questions = response.data.questions;
+
+
 			    	if (questions === undefined) {
 			    		alert("No questions found");
 						$scope.questsow='0';
@@ -221,20 +226,8 @@
 										  {"id":2, "text":questions[i].answer2, "image":questions[i].answer2_image},
 										  {"id":3, "text":questions[i].answer3, "image":questions[i].answer3_image}],
 								"correct" : questions[i].correct_answer,
-								"type": questions[i].type_id,
-								"calculator":questions[i].calculator
+								"type": questions[i].type_id
 							});
-						}
-						if($scope.myQuestions[0].calculator == "s" || $scope.myQuestions[0].calculator == "S"){
-							$scope.cindex = "s";
-						}
-						else{
-							if($scope.myQuestions[0].calculator == null || $scope.myQuestions[0].calculator == undefined){
-								$scope.cindex="x";
-							}
-							else{
-								$scope.cindex="x";
-							}
 						}
 					}						
 					$scope.totalQuestions = $scope.myQuestions.length;
@@ -252,20 +245,6 @@
 		$scope.scratchpadSwitch = function(){
 			$scope.scratchpad = $scope.scratchpad ? false : true;
 		}	
-
-		$scope.calculatorSwitch = function(){
-			$scope.calculator = $scope.calculator ? false : true;
-		}
-		
-		$scope.calculatorswitches = function(){
-			if($scope.cindex == "s"){
-				return true;
-			}
-			else{
-				return false;
-			}
-			
-		}
 		
 		// login and then get the questions from api
 
@@ -308,7 +287,6 @@
 		}
 
 		trackupdate = function(){
-			console.log("hello");
 			const trackCount = {};
 			for (const skill of $scope.completedskills) {
 				const trackId = skill.track_id;
@@ -333,7 +311,6 @@
 				if (trackDiv) {
 					trackDiv.style.width = `${percentage}%`;
 				}
-				console.log(trackDiv);
 			}
 
 		}
@@ -342,26 +319,23 @@
 			// main menu
 			$scope.welcome = 0;
 			if (type == "continue") {
-				console.log(type);
 				getQuestions($scope.baseurl+'/test/protected' + "/" + type);
 				hidemenu();
 				$scope.showback = 0;
 			} else if (type == "test") {
-				console.log(type);
 				getQuestions($scope.baseurl+'/test/protected' + "/" + type);
 				hidemenu();
 				$scope.showback = 0;
 			} else if (type == "skills") {
 				//post to update track and skill info
 				trackupdate();
-				console.log(type);
 				$scope.trackbuttons = 1;
 				hidemenu();
 				//$scope.skills = 1;
 			} else {
 				// back button
 				$scope.showtest = 1;
-				$scope.showcontinue = 1;
+				$scope.showcontinue = 1 &&  $scope.testcompleted;
 				$scope.showwelcome = 1;
 				$scope.showskills = 1;
 				$scope.showback = 0;
@@ -372,13 +346,24 @@
 
 		$scope.tracktest = function(type){
 			// Field questions from 1 track only
-			console.log(type);
+			getQuestions($scope.baseurl+'/test/trackquestions/'+type);
+			$scope.showtest = 0;
+			$scope.showcontinue = 0;
+			$scope.showwelcome = 0;
+			$scope.showskills = 0;
+			$scope.showback = 0;
+			$scope.trackbuttons = 0;
+
+			console.log($scope.baseurl+'/test/trackquestions/'+type);
 		}
 
 		$scope.login = function(type){
 		    // Set popup to true to use popup
 		    if (auth.isAuthenticated){
 				getLoginInfo($scope.baseurl+'/loginInfo');
+				$scope.percentage=0;
+				$scope.questsow = '1';
+				$scope.score=0;
 				//getQuestions($scope.baseurl+'/test/protected','' + "/" + type);
 //				$scope.percentage=0;
 //				$scope.questsow = '1';
@@ -467,22 +452,9 @@
 		}
 		$scope.selectContinue = function(qIndex){
 			$scope.myQuestions[qIndex].crts="abc";
-			if($scope.myQuestions[qIndex +1] != undefined){
-				if($scope.myQuestions[qIndex + 1].calculator == undefined || $scope.myQuestions[qIndex + 1].calculator == null){
-					$scope.cindex = "x";
-				}
-				else{
-					if($scope.myQuestions[qIndex + 1].calculator == "S" || $scope.myQuestions[qIndex + 1].calculator == "s"){
-						$scope.cindex="s";
-					}
-					else
-					{
-						$scope.cindex="x";
-					}
-				}
-			}
 			
 			if ($scope.totalQuestions == $scope.activeQuestion+1){
+				console.log($scope.myAnswers);
 				getQuestions($scope.baseurl+'/test/answers',$scope.myAnswers);
 				// Update skills completed table
 				// Write a different function instead of going to the same one to only retrieve completed skills

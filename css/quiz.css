@@ -26,7 +26,7 @@ body { background-color: #fff; width:100%;}
 
 #mathQuiz h1 {
 	font-weight: 100; font-size: 1.2em; text-transform: uppercase; margin: 0px;
-	position: absolute; top: 50px; left: 45px; color:#960000;
+	position: relative; top: 50px; left: 45px; color:#960000;
 }
 
 #mathQuiz h1 span {
